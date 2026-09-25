@@ -18,8 +18,10 @@ use App\Models\HomeSetting;
 use App\Models\AboutSetting;
 use App\Models\PortfolioSetting;
 use App\Models\ProjectCategory; 
-use App\Models\HeaderFooterSetting; 
+use App\Models\HeaderFooterSetting;
 use App\Models\BlogSetting;
+use App\Models\PageSetting;
+use App\Models\Faq;
 use View;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactFormRequest; 
@@ -243,6 +245,7 @@ class HomeController extends Controller
             'menus' => Menu::orderBy('order')->get(),
             'setting' => Setting::find($lang_id),
             'headerfooter' => HeaderFooterSetting::find($lang_id),
+            'pagesetting' => PageSetting::find($lang_id),
         ];
     }
 
@@ -270,7 +273,9 @@ class HomeController extends Controller
 
     public function faq()
     {
-        return view('sic.faq', $this->sicBaseData());
+        $data = $this->sicBaseData();
+        $data['faqs'] = Faq::orderBy('order')->get();
+        return view('sic.faq', $data);
     }
 
     public function careers()

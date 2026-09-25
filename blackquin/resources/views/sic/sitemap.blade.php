@@ -8,9 +8,9 @@
 
 <section class="page-hero">
     <div class="sic-container">
-        <div class="eyebrow">Sitemap</div>
-        <h1>One brand.<br><span class="accent">Every touchpoint.</span></h1>
-        <p>Every page on the Samudra International Commerce website, in one place.</p>
+        <div class="eyebrow">{{ $pagesetting->sitemap_hero_eyebrow ?? 'Sitemap' }}</div>
+        <h1>{{ $pagesetting->sitemap_hero_title_line1 ?? 'One brand.' }}<br><span class="accent">{{ $pagesetting->sitemap_hero_title_accent ?? 'Every touchpoint.' }}</span></h1>
+        <p>{{ $pagesetting->sitemap_hero_description ?? 'Every page on the Samudra International Commerce website, in one place.' }}</p>
     </div>
 </section>
 
