@@ -27,6 +27,7 @@ use App\Http\Controllers\BlogSettingController;
 use App\Http\Controllers\ContactSettingController;
 use App\Http\Controllers\HeaderFooterSettingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -67,6 +68,17 @@ Route::group(['middleware' => 'setlang'], function () {
     Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
     Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::post('/contact', [HomeController::class, 'contactPost'])->name('contactPost');
+
+    Route::get('/our-products', [ProductController::class, 'index'])->name('products.index');
+    Route::get('/our-products/{slug}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/insights', [HomeController::class, 'blog'])->name('insights.index');
+    Route::get('/get-a-quote', [HomeController::class, 'quote'])->name('quote');
+    Route::post('/get-a-quote', [HomeController::class, 'quotePost'])->name('quote.store');
+    Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
+    Route::get('/careers', [HomeController::class, 'careers'])->name('careers');
+    Route::get('/approach', [HomeController::class, 'approach'])->name('approach');
+    Route::get('/quality', [HomeController::class, 'quality'])->name('quality');
+    Route::get('/sitemap', [HomeController::class, 'sitemap'])->name('sitemap');
 
     Route::get('auth/facebook', [SocialController::class, 'facebookRedirect']);
 

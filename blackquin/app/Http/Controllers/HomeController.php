@@ -70,6 +70,8 @@ class HomeController extends Controller
         $data['projects'] = Project::where('language_id', $lang_id)->get();
         $data['testimonials'] = Testimonial::where('language_id', $lang_id)->get();
         $data['posts'] = Post::where('language_id', $lang_id)->get();
+        $data['featuredProducts'] = \App\Models\Product::orderBy('order')->limit(3)->get();
+        $data['latestPosts'] = Post::orderBy('created_at', 'desc')->limit(3)->get();
 
         return view('home', compact('langs'), $data);
     }
@@ -235,8 +237,65 @@ class HomeController extends Controller
         return view('contact', $data, compact('clients', 'langs'));
     }
 
+    protected function sicBaseData()
+    {
+        $currentLang = session()->has('lang')
+            ? Language::where('code', session()->get('lang'))->first()
+            : Language::where('is_default', 1)->first();
+        $lang_id = $currentLang->id;
 
+        return [
+            'currentLang' => $currentLang,
+            'langs' => Language::all(),
+            'menus' => Menu::orderBy('order')->get(),
+            'setting' => Setting::find($lang_id),
+            'headerfooter' => HeaderFooterSetting::find($lang_id),
+        ];
+    }
 
+    public function quote()
+    {
+        return view('sic.quote', $this->sicBaseData());
+    }
+
+    public function quotePost(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'company' => 'required',
+            'message' => 'required',
+        ]);
+
+        return back()->with('success', 'Thanks — our export team will get back to you shortly.');
+    }
+
+    public function faq()
+    {
+        return view('sic.faq', $this->sicBaseData());
+    }
+
+    public function careers()
+    {
+        return view('sic.careers', $this->sicBaseData());
+    }
+
+    public function approach()
+    {
+        return view('sic.approach', $this->sicBaseData());
+    }
+
+    public function quality()
+    {
+        return view('sic.quality', $this->sicBaseData());
+    }
+
+    public function sitemap()
+    {
+        $data = $this->sicBaseData();
+        $data['products'] = \App\Models\Product::orderBy('order')->get();
+        return view('sic.sitemap', $data);
+    }
 
 
 

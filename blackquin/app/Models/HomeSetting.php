@@ -58,6 +58,17 @@ class HomeSetting extends Model
     	'blog_title',
     	'blog_subtitle',
 
-
+        'hero_kicker', 'hero_title_line1', 'hero_title_line2', 'hero_description', 'hero_image',
+        'hero_button1_text', 'hero_button1_link', 'hero_button2_text', 'hero_button2_link',
+        'value1_title', 'value2_title', 'value3_title', 'value4_title',
+        'story_kicker', 'story_title', 'story_description', 'story_image', 'story_video_link',
+        'partner_kicker', 'partner_title', 'partner_description', 'partner_image',
+        'partner_point1_title', 'partner_point1_text', 'partner_point2_title', 'partner_point2_text',
+        'partner_buttontext', 'partner_buttonlink', 'insights_kicker',
+        'process_kicker', 'process_title', 'process_description',
+        'step1_title', 'step1_description', 'step1_linktext', 'step1_linkurl',
+        'step2_title', 'step2_description', 'step2_linktext', 'step2_linkurl',
+        'step3_title', 'step3_description', 'step3_linktext', 'step3_linkurl',
+        'cta_title_line1', 'cta_title_line2', 'cta_buttontext', 'cta_buttonlink',
 	];
 }

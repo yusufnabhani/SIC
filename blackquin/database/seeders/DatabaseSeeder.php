@@ -11,8 +11,9 @@ use Carbon\Carbon;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Minimal placeholder content so the site renders locally.
-     * Edit everything here from the admin dashboard after logging in.
+     * Baseline content matching the Samudra International Commerce mockup,
+     * so the site renders fully on a fresh migrate. Edit from the admin
+     * dashboard after logging in.
      *
      * @return void
      */
@@ -28,11 +29,22 @@ class DatabaseSeeder extends Seeder
             ['id' => 1, 'name' => 'English', 'code' => 'en', 'is_default' => 1, 'rtl' => 0, 'created_at' => $now, 'updated_at' => $now],
         ]);
 
+        $password = Str::random(16);
+        $adminId = DB::table('users')->insertGetId([
+            'name' => 'Admin',
+            'role_id' => 1,
+            'email' => 'admin@sic.test',
+            'email_verified_at' => $now,
+            'password' => Hash::make($password),
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
         DB::table('settings')->insert([
             'id' => 1,
-            'title' => 'Samudra International Commerce',
+            'title' => 'PT Samudra International Commerce',
             'favicon' => '',
-            'keywords' => 'samudra, international, commerce',
+            'keywords' => 'indonesian coffee, spices, botanicals, export, cassia cinnamon, cloves',
             'facebook_pixel' => '',
             'facebook_pixel_switch' => 0,
             'analytics' => '',
@@ -42,27 +54,30 @@ class DatabaseSeeder extends Seeder
             'OGgraph' => '',
             'OGgraph_switch' => 0,
             'photo_id' => null,
+            'address' => 'Menara Karya, 28th Floor, Jl. HR Rasuna Said Block X-5, Kav 1-2, South Jakarta, Indonesia 12950',
+            'contact' => 'info@samudrainternationalcommerce.com',
+            'author' => 'PT Samudra International Commerce',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
 
         DB::table('header_footer_settings')->insert([
             'id' => 1,
-            'sidebar_title' => 'Samudra International Commerce',
-            'sidebar_description' => 'Official website of Samudra International Commerce.',
-            'typed_title' => 'Samudra International Commerce',
-            'typed_text' => 'Trusted Trading Partner',
-            'typed_buttontext' => 'Contact Us',
-            'typed_buttonlink' => '/contact',
-            'footer_col1_subtitle' => 'About',
+            'sidebar_title' => 'Get a quote',
+            'sidebar_description' => '/get-a-quote',
+            'typed_title' => 'Your next great ingredient starts with a conversation.',
+            'typed_text' => '["Direct sourcing", "Consistent quality", "Trusted partnership"]',
+            'typed_buttontext' => 'Talk to our export team',
+            'typed_buttonlink' => '/get-a-quote',
+            'footer_col1_subtitle' => "Connecting Indonesia's natural excellence with the world through trusted sourcing and lasting partnerships.",
             'footer_col1_title' => 'Samudra International Commerce',
             'footer_col1_buttontext' => 'Learn More',
-            'footer_col1_buttonlink' => '/about',
-            'footer_col2_title1' => 'Company',
-            'footer_col2_title2' => 'Contact',
+            'footer_col1_buttonlink' => '/about-us',
+            'footer_col2_title1' => 'Discover',
+            'footer_col2_title2' => "Let's connect",
             'footer_col2_html1' => '<p>About Us</p>',
             'footer_col2_html2' => '<p>Contact Us</p>',
-            'footer_copyright' => '&copy; ' . $now->year . ' Samudra International Commerce. All rights reserved.',
+            'footer_copyright' => '&copy; ' . $now->year . ' PT Samudra International Commerce. All rights reserved.',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -70,31 +85,81 @@ class DatabaseSeeder extends Seeder
         DB::table('home_settings')->insert([
             'id' => 1,
             'meta_title' => 'Samudra International Commerce',
-            'meta_description' => 'Official website of Samudra International Commerce.',
+            'meta_description' => 'Exceptional Indonesian coffee, spices, and botanicals. Responsibly sourced. Thoughtfully delivered.',
             'fun_title' => 'Our Achievements',
             'fun_description' => 'Placeholder stats — edit from the dashboard.',
-            'count_number1' => '0',
-            'count_description1' => 'Clients',
-            'count_number2' => '0',
-            'count_description2' => 'Projects',
-            'count_number3' => '0',
-            'count_description3' => 'Years',
-            'count_number4' => '0',
-            'count_description4' => 'Team Members',
+            'count_number1' => '0', 'count_description1' => 'Clients',
+            'count_number2' => '0', 'count_description2' => 'Projects',
+            'count_number3' => '0', 'count_description3' => 'Years',
+            'count_number4' => '0', 'count_description4' => 'Team Members',
             'about_subtitle' => 'About Us',
             'about_title' => 'Samudra International Commerce',
             'about_description' => 'Placeholder description — edit this from the admin dashboard.',
             'about_buttontext' => 'Learn More',
-            'about_buttonlink' => '/about',
-            'about_image1' => '',
-            'about_image2' => '',
-            'about_yearstitle' => '0',
-            'about_yearstext' => 'Years of experience',
+            'about_buttonlink' => '/about-us',
+            'about_image1' => '', 'about_image2' => '',
+            'about_yearstitle' => '0', 'about_yearstext' => 'Years of experience',
             'services_title' => 'Our Services',
             'projects_title' => 'Our Projects',
             'projects_subtitle' => 'What we have done',
             'blog_title' => 'Latest News',
             'blog_subtitle' => 'From our blog',
+
+            'hero_kicker' => 'Rooted in Indonesia. Ready for the world.',
+            'hero_title_line1' => 'From our land.',
+            'hero_title_line2' => 'To your world.',
+            'hero_description' => 'Exceptional Indonesian coffee, spices, and botanicals. Responsibly sourced. Thoughtfully delivered.',
+            'hero_image' => 'home_img1_749x662.png',
+            'hero_button1_text' => 'Explore our products',
+            'hero_button1_link' => '/our-products',
+            'hero_button2_text' => 'Discover Samudra',
+            'hero_button2_link' => '/about-us',
+
+            'value1_title' => 'Direct sourcing network',
+            'value2_title' => 'Consistent product quality',
+            'value3_title' => 'Transparent partnership',
+            'value4_title' => 'Long-term commitment',
+
+            'story_kicker' => 'Inside Samudra',
+            'story_title' => 'See the story behind the source.',
+            'story_description' => 'Take a closer look at the ingredients, people, and partnerships that connect Indonesia with the world.',
+            'story_image' => 'home_img7_1282x583.png',
+            'story_video_link' => '#',
+
+            'partner_kicker' => 'More than an export partner',
+            'partner_title' => 'Good products. Even better partnerships.',
+            'partner_description' => 'We connect trusted Indonesian farmers, cooperatives and producers with businesses around the world. With care at every step, from responsible sourcing to export preparation.',
+            'partner_image' => 'home_img8_601x510.png',
+            'partner_point1_title' => 'Close to the source',
+            'partner_point1_text' => "Built on relationships with Indonesia's growing communities.",
+            'partner_point2_title' => 'Focused on your business',
+            'partner_point2_text' => 'Clear specifications and a collaborative approach to sourcing.',
+            'partner_buttontext' => 'Get to know Samudra',
+            'partner_buttonlink' => '/about-us',
+
+            'insights_kicker' => 'From origin to opportunity',
+
+            'process_kicker' => 'How we deliver',
+            'process_title' => 'From trusted origins to export-ready supply.',
+            'process_description' => 'Direct sourcing, selected in-house processing, quality control and professional export coordination form one connected approach.',
+            'step1_title' => 'Source & process',
+            'step1_description' => 'Work with Indonesian growers and prepare selected ingredients in the forms buyers need.',
+            'step1_linktext' => 'Our approach',
+            'step1_linkurl' => '/approach',
+            'step2_title' => 'Check & document',
+            'step2_description' => 'Review product quality and coordinate documentation for the trade.',
+            'step2_linktext' => 'Quality & compliance',
+            'step2_linkurl' => '/quality',
+            'step3_title' => 'Partner & deliver',
+            'step3_description' => 'Align on the specification, destination and commercial terms with each buyer.',
+            'step3_linktext' => 'Start a conversation',
+            'step3_linkurl' => '/get-a-quote',
+
+            'cta_title_line1' => "Let's grow together.",
+            'cta_title_line2' => 'Your next great ingredient starts with a conversation.',
+            'cta_buttontext' => 'Talk to our export team',
+            'cta_buttonlink' => '/get-a-quote',
+
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -102,17 +167,17 @@ class DatabaseSeeder extends Seeder
         DB::table('about_settings')->insert([
             'id' => 1,
             'meta_title' => 'About Us - Samudra International Commerce',
-            'meta_description' => 'About Samudra International Commerce.',
+            'meta_description' => "Connecting Indonesia's agricultural heritage with the possibilities of global trade.",
             'slug' => 'about-us',
-            'breadcrumbs_anchor' => 'About Us',
-            'about_subtitle' => 'About Us',
-            'about_title' => 'Samudra International Commerce',
-            'about_description' => 'Placeholder description — edit this from the admin dashboard.',
-            'about_buttontext' => 'Contact Us',
-            'about_buttonlink' => '/contact',
-            'about_image' => '',
+            'breadcrumbs_anchor' => 'About Samudra',
+            'about_subtitle' => 'Our Story',
+            'about_title' => 'A bridge between land and opportunity.',
+            'about_description' => 'PT Samudra International Commerce is an Indonesian trading, sourcing and processing company bringing coffee, spices and botanicals to international markets. We work with farmers, cooperatives and supply partners to help buyers source with confidence.',
+            'about_buttontext' => 'Explore our portfolio',
+            'about_buttonlink' => '/our-products',
+            'about_image' => 'about_img1_601x510.png',
             'about_ytlink' => '',
-            'member_title_section' => 'Our Team',
+            'member_title_section' => 'People behind the partnerships.',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -120,24 +185,24 @@ class DatabaseSeeder extends Seeder
         DB::table('contact_settings')->insert([
             'id' => 1,
             'meta_title' => 'Contact Us - Samudra International Commerce',
-            'meta_description' => 'Contact Samudra International Commerce.',
+            'meta_description' => 'Tell us what your business needs. Let\'s explore what we can source together.',
             'slug' => 'contact',
             'breadcrumbs_anchor' => 'Contact',
             'box_icon1' => '', 'box_icon2' => '', 'box_icon3' => '',
-            'box_title1' => 'Address', 'box_title2' => 'Phone', 'box_title3' => 'Email',
-            'box_html1' => '<p>Placeholder address</p>',
-            'box_html2' => '<p>Placeholder phone</p>',
-            'box_html3' => '<p>Placeholder email</p>',
-            'form_title' => 'Get In Touch',
-            'form_input_name' => 'Name',
-            'form_input_email' => 'Email',
-            'form_input_budget' => 'Subject',
-            'form_input_phone' => 'Phone',
-            'form_message' => 'Message',
-            'button_text' => 'Send',
+            'box_title1' => 'Email us', 'box_title2' => 'Call us', 'box_title3' => 'Our office',
+            'box_html1' => '<p>info@samudrainternationalcommerce.com</p>',
+            'box_html2' => '<p>+62 823 7953 5398</p>',
+            'box_html3' => '<p>Menara Karya, 28th Floor, Jl. HR Rasuna Said, South Jakarta 12950</p>',
+            'form_title' => "Let's have a conversation.",
+            'form_input_name' => 'Full name',
+            'form_input_email' => 'Business email',
+            'form_input_budget' => 'Company',
+            'form_input_phone' => 'Phone number',
+            'form_message' => 'Your message',
+            'button_text' => 'Send message',
             'button_link' => '',
-            'mailto' => 'noreply@sic.test',
-            'title' => 'Contact Us',
+            'mailto' => 'info@samudrainternationalcommerce.com',
+            'title' => 'Great partnerships start here.',
             'iframe_txt' => '',
             'created_at' => $now,
             'updated_at' => $now,
@@ -157,10 +222,10 @@ class DatabaseSeeder extends Seeder
 
         DB::table('blog_settings')->insert([
             'id' => 1,
-            'meta_title' => 'Blog - Samudra International Commerce',
-            'meta_description' => 'Blog of Samudra International Commerce.',
-            'slug' => 'blog',
-            'breadcrumbs_anchor' => 'Blog',
+            'meta_title' => 'Insights - Samudra International Commerce',
+            'meta_description' => 'A closer look at coffee, spices and export from PT Samudra International Commerce.',
+            'slug' => 'insights',
+            'breadcrumbs_anchor' => 'Insights',
             'html_sidebar1' => '',
             'html_sidebar2' => '',
             'created_at' => $now,
@@ -179,17 +244,141 @@ class DatabaseSeeder extends Seeder
             'updated_at' => $now,
         ]);
 
-        $password = Str::random(16);
-
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'role_id' => 1,
-            'email' => 'admin@sic.test',
-            'email_verified_at' => $now,
-            'password' => Hash::make($password),
-            'created_at' => $now,
-            'updated_at' => $now,
+        // ---------------- Navigation ----------------
+        DB::table('menus')->insert([
+            ['name' => 'Home', 'link' => '/', 'on_off_submenu' => 0, 'order' => 1, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'About us', 'link' => '/about-us', 'on_off_submenu' => 0, 'order' => 2, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Our products', 'link' => '/our-products', 'on_off_submenu' => 0, 'order' => 3, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Insights', 'link' => '/insights', 'on_off_submenu' => 0, 'order' => 4, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Careers', 'link' => '/careers', 'on_off_submenu' => 0, 'order' => 5, 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Contact', 'link' => '/contact', 'on_off_submenu' => 0, 'order' => 6, 'created_at' => $now, 'updated_at' => $now],
         ]);
+
+        // ---------------- Leadership (About page) ----------------
+        $leaderPhotoIds = [];
+        foreach (['leader_diah_bardiah.png', 'leader_toni_hainuri.png', 'leader_ujang_yusup_nabhani.png'] as $file) {
+            $leaderPhotoIds[$file] = DB::table('photos')->insertGetId(['file' => 'sic-' . $file, 'created_at' => $now, 'updated_at' => $now]);
+        }
+        DB::table('members')->insert([
+            ['name' => 'Diah Bardiah', 'position' => 'Chief Executive Officer', 'photo_id' => $leaderPhotoIds['leader_diah_bardiah.png'], 'facebook' => '', 'twitter' => '', 'linkedin' => '', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Ujang Yusup Nabhani', 'position' => 'Chief Marketing Officer', 'photo_id' => $leaderPhotoIds['leader_ujang_yusup_nabhani.png'], 'facebook' => '', 'twitter' => '', 'linkedin' => '', 'created_at' => $now, 'updated_at' => $now],
+            ['name' => 'Toni Hainuri', 'position' => 'Chief Business Architect', 'photo_id' => $leaderPhotoIds['leader_toni_hainuri.png'], 'facebook' => '', 'twitter' => '', 'linkedin' => '', 'created_at' => $now, 'updated_at' => $now],
+        ]);
+
+        // ---------------- Insights (blog) ----------------
+        $categoryId = DB::table('categories')->insertGetId(['name' => 'Insights', 'created_at' => $now, 'updated_at' => $now]);
+
+        $postPhotoIds = [];
+        foreach (['home_img9_409x264.png', 'home_img10_409x264.png', 'home_img11_409x264.png'] as $file) {
+            $postPhotoIds[] = DB::table('photos')->insertGetId(['file' => 'sic-' . $file, 'created_at' => $now, 'updated_at' => $now]);
+        }
+
+        $posts = [
+            [
+                'title' => 'The world drinks coffee every day.',
+                'slug' => 'the-world-drinks-coffee-every-day',
+                'body' => '<p>Coffee is one of the most consumed beverages on earth, and Indonesia remains one of its most distinctive origins. From the highlands of Gayo to Java, growing regions each bring their own character to the cup — placeholder article, edit from the dashboard.</p>',
+            ],
+            [
+                'title' => 'Most import problems start before the shipment.',
+                'slug' => 'most-import-problems-start-before-the-shipment',
+                'body' => '<p>Clear specification and documentation prevent the majority of issues buyers encounter. Here is what we coordinate before any container leaves Indonesia — placeholder article, edit from the dashboard.</p>',
+            ],
+            [
+                'title' => 'Spices are easy to grow. Hard to standardize.',
+                'slug' => 'spices-are-easy-to-grow-hard-to-standardize',
+                'body' => '<p>Consistent quality across harvests and suppliers takes deliberate process. This is how we approach standardization for cassia, cloves and pepper — placeholder article, edit from the dashboard.</p>',
+            ],
+        ];
+
+        foreach ($posts as $i => $post) {
+            DB::table('posts')->insert([
+                'locale' => 'en',
+                'user_id' => $adminId,
+                'category_id' => $categoryId,
+                'photo_id' => $postPhotoIds[$i],
+                'title' => $post['title'],
+                'slug' => $post['slug'],
+                'body' => $post['body'],
+                'meta_title' => $post['title'],
+                'meta_description' => strip_tags($post['body']),
+                'created_at' => $now->copy()->subDays(3 - $i),
+                'updated_at' => $now,
+            ]);
+        }
+
+        // ---------------- Products ----------------
+        $products = [
+            ['name' => 'Coffee', 'slug' => 'coffee', 'category' => 'coffee_cocoa', 'botanical_name' => 'Arabica & Robusta', 'origin' => 'Gayo, Aceh · Java, Indonesia', 'image' => 'coffee.png', 'description' => "Green coffee beans from Indonesia's distinctive growing regions, selected for roasters, importers and coffee brands.", 'forms' => [
+                ['name' => 'Gayo Arabica Green Coffee Beans', 'origin' => 'Gayo Highlands, Aceh', 'processing' => 'Semi-washed / full-washed', 'screen' => '16 up', 'grade' => 'Commercial / buyer specification', 'moisture' => '12–13%', 'defect_standard' => 'According to buyer specification', 'packaging' => '60 kg new jute bag; GrainPro liner optional'],
+                ['name' => 'Java Robusta Green Coffee Beans', 'origin' => 'East Java', 'processing' => 'Dry / wet-hulled', 'screen' => '15 up', 'grade' => 'Commercial / buyer specification', 'moisture' => '12–13%', 'defect_standard' => 'According to buyer specification', 'packaging' => '60 kg new jute bag; GrainPro liner optional'],
+            ]],
+            ['name' => 'Cassia Cinnamon', 'slug' => 'cassia-cinamon', 'category' => 'spices', 'botanical_name' => 'Cinnamomum burmannii', 'origin' => 'West Sumatra, Indonesia', 'image' => 'cassia_cinnamon.png', 'description' => 'Warm, aromatic cassia cinnamon in cuts and forms suited to food manufacturing and retail packing.', 'forms' => [
+                ['name' => 'Cassia Vera Whole', 'origin' => 'Kerinci, West Sumatra', 'processing' => 'Sun-dried', 'grade' => 'AA / A / B', 'moisture' => '≤13%', 'packaging' => '25 kg bale'],
+            ]],
+            ['name' => 'Cloves', 'slug' => 'cloves', 'category' => 'spices', 'botanical_name' => 'Syzygium aromaticum', 'origin' => 'Sulawesi & Maluku, Indonesia', 'image' => 'cloves.png', 'description' => 'Rich, aromatic whole cloves rooted in tradition, hand-sorted for oil content and appearance.', 'forms' => [
+                ['name' => 'Whole Cloves (Hand-picked)', 'origin' => 'Sulawesi', 'processing' => 'Sun-dried', 'grade' => 'Export grade', 'moisture' => '≤12%', 'packaging' => '25 kg PP bag'],
+            ]],
+            ['name' => 'Ginger', 'slug' => 'ginger', 'category' => 'botanicals', 'botanical_name' => 'Zingiber officinale', 'origin' => 'Central Java, Indonesia', 'image' => 'ginger.png', 'description' => 'Fresh and dried ginger for food, beverage and pharmaceutical applications.', 'forms' => [
+                ['name' => 'Dried Ginger Slices', 'processing' => 'Sun-dried, sliced', 'moisture' => '≤10%', 'packaging' => '25 kg carton'],
+            ]],
+            ['name' => 'Galangal', 'slug' => 'galangal', 'category' => 'botanicals', 'botanical_name' => 'Alpinia galanga', 'origin' => 'Java, Indonesia', 'image' => 'galangal.png', 'description' => 'Aromatic galangal root, fresh or dried, for culinary and herbal use.', 'forms' => [
+                ['name' => 'Dried Galangal Slices', 'processing' => 'Sun-dried, sliced', 'moisture' => '≤10%', 'packaging' => '25 kg carton'],
+            ]],
+            ['name' => 'Turmeric', 'slug' => 'turmeric', 'category' => 'botanicals', 'botanical_name' => 'Curcuma longa', 'origin' => 'Java, Indonesia', 'image' => 'turmeric.png', 'description' => 'Vivid Indonesian turmeric, available fresh, dried or as powder.', 'forms' => [
+                ['name' => 'Dried Turmeric Slices', 'processing' => 'Sun-dried, sliced', 'moisture' => '≤10%', 'packaging' => '25 kg carton'],
+            ]],
+            ['name' => 'Java Turmeric', 'slug' => 'java-turmeric', 'category' => 'botanicals', 'botanical_name' => 'Curcuma xanthorrhiza', 'origin' => 'Java, Indonesia', 'image' => 'java_turmeric.jpeg', 'description' => 'Temulawak / Java turmeric, valued in traditional herbal preparations.', 'forms' => []],
+            ['name' => 'White Pepper', 'slug' => 'white-pepper', 'category' => 'spices', 'botanical_name' => 'Piper nigrum', 'origin' => 'Bangka Belitung, Indonesia', 'image' => 'white_pepper.png', 'description' => 'Clean, pungent Muntok white pepper for food manufacturing and export.', 'forms' => [
+                ['name' => 'Muntok White Pepper', 'origin' => 'Bangka Belitung', 'grade' => 'ASTA / FAQ', 'moisture' => '≤13%', 'packaging' => '25/50 kg PP bag'],
+            ]],
+            ['name' => 'Black Pepper', 'slug' => 'black-pepper', 'category' => 'spices', 'botanical_name' => 'Piper nigrum', 'origin' => 'Lampung, Indonesia', 'image' => 'black_pepper.png', 'description' => 'Bold Lampung black pepper, hand-selected for density and aroma.', 'forms' => [
+                ['name' => 'Lampung Black Pepper', 'origin' => 'Lampung', 'grade' => 'ASTA / FAQ', 'moisture' => '≤13%', 'packaging' => '25/50 kg PP bag'],
+            ]],
+            ['name' => 'Cardamom', 'slug' => 'cardamom', 'category' => 'spices', 'botanical_name' => 'Amomum compactum', 'origin' => 'Java, Indonesia', 'image' => 'cardamom.jpeg', 'description' => 'Indonesian cardamom for spice blends and traditional medicine.', 'forms' => []],
+            ['name' => 'Clove Stems', 'slug' => 'clove-stems', 'category' => 'spices', 'botanical_name' => 'Syzygium aromaticum', 'origin' => 'Sulawesi, Indonesia', 'image' => 'clove_stems.jpeg', 'description' => 'Clove stems for oil extraction and industrial use.', 'forms' => []],
+            ['name' => 'Nutmeg', 'slug' => 'nutmeg', 'category' => 'spices', 'botanical_name' => 'Myristica fragrans', 'origin' => 'Maluku & West Sumatra, Indonesia', 'image' => 'nutmeg.png', 'description' => 'Indonesian nutmeg, the origin of the spice, in whole and split forms.', 'forms' => [
+                ['name' => 'Whole Nutmeg (ABCD grade)', 'origin' => 'Siau, North Sulawesi', 'grade' => 'ABCD', 'moisture' => '≤10%', 'packaging' => '25/50 kg PP bag'],
+            ]],
+            ['name' => 'Candlenuts', 'slug' => 'candlenuts', 'category' => 'spices', 'botanical_name' => 'Aleurites moluccanus', 'origin' => 'Sulawesi, Indonesia', 'image' => 'candlenuts.png', 'description' => 'Indonesian candlenuts (kemiri), a staple ingredient in Southeast Asian cuisine.', 'forms' => []],
+            ['name' => 'Vanilla Beans', 'slug' => 'vanilla-beans', 'category' => 'spices', 'botanical_name' => 'Vanilla planifolia', 'origin' => 'Papua & Bali, Indonesia', 'image' => 'vanilla_beans.png', 'description' => 'Indonesian cured vanilla beans, prized for their rich flavor profile.', 'forms' => []],
+            ['name' => 'Cocoa Beans', 'slug' => 'cocoa-beans', 'category' => 'coffee_cocoa', 'botanical_name' => 'Theobroma cacao', 'origin' => 'Sulawesi, Indonesia', 'image' => 'cocoa_beans.png', 'description' => 'Fermented Indonesian cocoa beans for chocolate manufacturing.', 'forms' => []],
+            ['name' => 'Moringa', 'slug' => 'moringa', 'category' => 'botanicals', 'botanical_name' => 'Moringa oleifera', 'origin' => 'East Java, Indonesia', 'image' => 'moringa.png', 'description' => 'Indonesian moringa leaf powder, a nutrient-dense superfood ingredient.', 'forms' => []],
+            ['name' => 'Aromatic Ginger', 'slug' => 'aromatic-ginger', 'category' => 'botanicals', 'botanical_name' => 'Kaempferia galanga', 'origin' => 'Java, Indonesia', 'image' => 'aromatic_ginger.jpeg', 'description' => 'Kencur / aromatic ginger, used in traditional Indonesian herbal drinks.', 'forms' => []],
+            ['name' => 'Noni', 'slug' => 'noni', 'category' => 'botanicals', 'botanical_name' => 'Morinda citrifolia', 'origin' => 'Java, Indonesia', 'image' => 'noni.jpeg', 'description' => 'Dried noni fruit for herbal and nutraceutical applications.', 'forms' => []],
+        ];
+
+        foreach ($products as $order => $p) {
+            $productId = DB::table('products')->insertGetId([
+                'name' => $p['name'],
+                'slug' => $p['slug'],
+                'category' => $p['category'],
+                'botanical_name' => $p['botanical_name'],
+                'description' => $p['description'],
+                'origin' => $p['origin'],
+                'image' => $p['image'],
+                'order' => $order + 1,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+
+            foreach ($p['forms'] as $fi => $form) {
+                DB::table('product_forms')->insert(array_merge([
+                    'product_id' => $productId,
+                    'order' => $fi + 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], $form, [
+                    'origin' => $form['origin'] ?? null,
+                    'processing' => $form['processing'] ?? null,
+                    'screen' => $form['screen'] ?? null,
+                    'grade' => $form['grade'] ?? null,
+                    'moisture' => $form['moisture'] ?? null,
+                    'defect_standard' => $form['defect_standard'] ?? null,
+                    'packaging' => $form['packaging'] ?? null,
+                ]));
+            }
+        }
 
         $this->command->info("Admin login -> email: admin@sic.test | password: {$password}");
     }
