@@ -36,7 +36,7 @@ class ContactSettingController extends Controller
      */
     public function update(Request $request, ContactSetting $setting, $langid)
     {
-        $setting = ContactSetting::where('language_id', $langid)->firstOrFail();
+        $setting = ContactSetting::findOrFail($langid);
         
         $input = $request->all();
 

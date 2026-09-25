@@ -34,7 +34,7 @@ class PricingSettingController extends Controller
      */
     public function update(Request $request, PricingSetting $setting, $langid)
     {
-        $setting = PricingSetting::where('language_id', $langid)->firstOrFail();
+        $setting = PricingSetting::findOrFail($langid);
         
         $input = $request->all();
 

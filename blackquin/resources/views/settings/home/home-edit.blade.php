@@ -477,6 +477,149 @@
                         </div>
                         <!-- blog -->
 
+                        <!-- Redesign: hero -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-dark">Hero banner (new site design)</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{route('home-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="form-group"><strong>Kicker</strong><input type="text" name="hero_kicker" class="form-control" value="{{$setting->hero_kicker}}"></div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 1</strong><input type="text" name="hero_title_line1" class="form-control" value="{{$setting->hero_title_line1}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 2</strong><input type="text" name="hero_title_line2" class="form-control" value="{{$setting->hero_title_line2}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="hero_description" class="form-control" rows="2">{{$setting->hero_description}}</textarea></div>
+                                    <div class="form-group"><strong>Image filename (in public/images/sic/)</strong><input type="text" name="hero_image" class="form-control" value="{{$setting->hero_image}}"></div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Button 1 text</strong><input type="text" name="hero_button1_text" class="form-control" value="{{$setting->hero_button1_text}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Button 1 link</strong><input type="text" name="hero_button1_link" class="form-control" value="{{$setting->hero_button1_link}}"></div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Button 2 text</strong><input type="text" name="hero_button2_text" class="form-control" value="{{$setting->hero_button2_text}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Button 2 link</strong><input type="text" name="hero_button2_link" class="form-control" value="{{$setting->hero_button2_link}}"></div></div>
+                                    </div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: value strip -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-dark">Value strip (4 short highlights)</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{route('home-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-3"><div class="form-group"><strong>Value 1</strong><input type="text" name="value1_title" class="form-control" value="{{$setting->value1_title}}"></div></div>
+                                        <div class="col-md-3"><div class="form-group"><strong>Value 2</strong><input type="text" name="value2_title" class="form-control" value="{{$setting->value2_title}}"></div></div>
+                                        <div class="col-md-3"><div class="form-group"><strong>Value 3</strong><input type="text" name="value3_title" class="form-control" value="{{$setting->value3_title}}"></div></div>
+                                        <div class="col-md-3"><div class="form-group"><strong>Value 4</strong><input type="text" name="value4_title" class="form-control" value="{{$setting->value4_title}}"></div></div>
+                                    </div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: story -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-dark">Our story section</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{route('home-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Kicker</strong><input type="text" name="story_kicker" class="form-control" value="{{$setting->story_kicker}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title</strong><input type="text" name="story_title" class="form-control" value="{{$setting->story_title}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="story_description" class="form-control" rows="2">{{$setting->story_description}}</textarea></div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Image filename</strong><input type="text" name="story_image" class="form-control" value="{{$setting->story_image}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Video link</strong><input type="text" name="story_video_link" class="form-control" value="{{$setting->story_video_link}}"></div></div>
+                                    </div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: partnership -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-dark">Partnership section</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{route('home-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Kicker</strong><input type="text" name="partner_kicker" class="form-control" value="{{$setting->partner_kicker}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title</strong><input type="text" name="partner_title" class="form-control" value="{{$setting->partner_title}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="partner_description" class="form-control" rows="2">{{$setting->partner_description}}</textarea></div>
+                                    <div class="form-group"><strong>Image filename</strong><input type="text" name="partner_image" class="form-control" value="{{$setting->partner_image}}"></div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Point 1 title</strong><input type="text" name="partner_point1_title" class="form-control" value="{{$setting->partner_point1_title}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Point 1 text</strong><input type="text" name="partner_point1_text" class="form-control" value="{{$setting->partner_point1_text}}"></div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Point 2 title</strong><input type="text" name="partner_point2_title" class="form-control" value="{{$setting->partner_point2_title}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Point 2 text</strong><input type="text" name="partner_point2_text" class="form-control" value="{{$setting->partner_point2_text}}"></div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Button text</strong><input type="text" name="partner_buttontext" class="form-control" value="{{$setting->partner_buttontext}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Button link</strong><input type="text" name="partner_buttonlink" class="form-control" value="{{$setting->partner_buttonlink}}"></div></div>
+                                    </div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: process + cta -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-dark">Process steps &amp; bottom CTA</h6>
+                            </div>
+                            <div class="card-body">
+                                <form action="{{route('home-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-4"><div class="form-group"><strong>Insights kicker</strong><input type="text" name="insights_kicker" class="form-control" value="{{$setting->insights_kicker}}"></div></div>
+                                        <div class="col-md-4"><div class="form-group"><strong>Process kicker</strong><input type="text" name="process_kicker" class="form-control" value="{{$setting->process_kicker}}"></div></div>
+                                        <div class="col-md-4"><div class="form-group"><strong>Process title</strong><input type="text" name="process_title" class="form-control" value="{{$setting->process_title}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Process description</strong><textarea name="process_description" class="form-control" rows="2">{{$setting->process_description}}</textarea></div>
+                                    @for ($i = 1; $i <= 3; $i++)
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-md-3"><div class="form-group"><strong>Step {{ $i }} title</strong><input type="text" name="step{{ $i }}_title" class="form-control" value="{{ $setting->{'step'.$i.'_title'} }}"></div></div>
+                                            <div class="col-md-4"><div class="form-group"><strong>Step {{ $i }} description</strong><input type="text" name="step{{ $i }}_description" class="form-control" value="{{ $setting->{'step'.$i.'_description'} }}"></div></div>
+                                            <div class="col-md-3"><div class="form-group"><strong>Step {{ $i }} link text</strong><input type="text" name="step{{ $i }}_linktext" class="form-control" value="{{ $setting->{'step'.$i.'_linktext'} }}"></div></div>
+                                            <div class="col-md-2"><div class="form-group"><strong>Step {{ $i }} link URL</strong><input type="text" name="step{{ $i }}_linkurl" class="form-control" value="{{ $setting->{'step'.$i.'_linkurl'} }}"></div></div>
+                                        </div>
+                                    @endfor
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>CTA title line 1</strong><input type="text" name="cta_title_line1" class="form-control" value="{{$setting->cta_title_line1}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>CTA title line 2</strong><input type="text" name="cta_title_line2" class="form-control" value="{{$setting->cta_title_line2}}"></div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>CTA button text</strong><input type="text" name="cta_buttontext" class="form-control" value="{{$setting->cta_buttontext}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>CTA button link</strong><input type="text" name="cta_buttonlink" class="form-control" value="{{$setting->cta_buttonlink}}"></div></div>
+                                    </div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Redesign -->
+
                         <!-- SEO -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">

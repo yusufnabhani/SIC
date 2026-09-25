@@ -36,7 +36,7 @@ class AboutSettingController extends Controller
      */
     public function update(Request $request, AboutSetting $setting, $langid)
     {
-        $setting = AboutSetting::where('language_id', $langid)->firstOrFail();
+        $setting = AboutSetting::findOrFail($langid);
         
         $input = $request->all();
 

@@ -28,6 +28,8 @@ use App\Http\Controllers\ContactSettingController;
 use App\Http\Controllers\HeaderFooterSettingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\PageSettingController;
 
 
 /*
@@ -172,6 +174,23 @@ Route::middleware(['admin'])->group(function () {
     Route::get('admin/settings', [SettingController::class, 'edit'])->name('setting.edit');
     Route::put('admin/settings/{langid}/update', [SettingController::class, 'update'])->name('setting.update');
 
+    // Products (Our Products catalog)
+    Route::get('admin/products', [ProductController::class, 'admin_index'])->name('product.index');
+    Route::get('admin/products/create', [ProductController::class, 'admin_create'])->name('product.create');
+    Route::post('admin/products', [ProductController::class, 'admin_store'])->name('product.store');
+    Route::get('admin/products/{product}/edit', [ProductController::class, 'admin_edit'])->name('product.edit');
+    Route::put('admin/products/{product}', [ProductController::class, 'admin_update'])->name('product.update');
+    Route::delete('/delete/product', [ProductController::class, 'delete_product'])->name('delete.product');
+    Route::post('admin/products/{product}/forms', [ProductController::class, 'storeForm'])->name('product.forms.store');
+    Route::delete('admin/product-forms/{form}', [ProductController::class, 'deleteForm'])->name('product.forms.delete');
+
+    // FAQ
+    Route::resource('admin/faq', FaqController::class)->except(['show', 'destroy']);
+    Route::delete('/delete/faq', [FaqController::class, 'delete_faq'])->name('delete.faq');
+
+    // Page content: Approach, Quality, Careers, Quote, FAQ hero, Sitemap
+    Route::get('admin/page-settings', [PageSettingController::class, 'edit'])->name('page-setting.edit');
+    Route::put('admin/page-settings/{id}/update', [PageSettingController::class, 'update'])->name('page-setting.update');
 
 });
 Route::middleware(['XSS'])->group(function () { 

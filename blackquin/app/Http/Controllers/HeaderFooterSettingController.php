@@ -35,7 +35,7 @@ class HeaderFooterSettingController extends Controller
      */
     public function update(Request $request, HeaderFooterSetting $setting, $langid)
     {
-        $setting = HeaderFooterSetting::where('language_id', $langid)->firstOrFail();
+        $setting = HeaderFooterSetting::findOrFail($langid);
         
         $input = $request->all();
 

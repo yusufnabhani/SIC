@@ -37,7 +37,7 @@ class BlogSettingController extends Controller
      */
     public function update(Request $request, BlogSetting $setting, $langid)
     {
-        $setting = BlogSetting::where('language_id', $langid)->firstOrFail();
+        $setting = BlogSetting::findOrFail($langid);
         
         $input = $request->all();
 

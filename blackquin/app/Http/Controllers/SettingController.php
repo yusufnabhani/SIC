@@ -36,25 +36,28 @@ class SettingController extends Controller
     public function update(Request $request, Setting $setting, $langid)
     {
 
-        $setting = Setting::where('language_id', $langid)->firstOrFail();
-        
+        $setting = Setting::findOrFail($langid);
+
         $input = $request->all();
 
-        $this->validate($request, [
+        // These columns are NOT NULL; Laravel's ConvertEmptyStringsToNull
+        // middleware turns a blank input into null, so coerce back to ''.
+        foreach (['favicon', 'keywords', 'facebook_pixel', 'analytics', 'SchmeaORG', 'OGgraph'] as $field) {
+            $input[$field] = $input[$field] ?? '';
+        }
 
-            'photo_id' => 'mimes:jpg,jpeg,png,webp,gif,svg']
+        if ($request->hasFile('photo_id')) {
+            $this->validate($request, [
+                'photo_id' => 'mimes:jpg,jpeg,png,webp,gif,svg',
+            ]);
 
-        );
-
-        if ($file = $request->file('photo_id')) {
-            
+            $file = $request->file('photo_id');
             $name = time() . $file->getClientOriginalName();
-
             $file->move('images/media/', $name);
-
             $photo = Photo::create(['file'=>$name]);
-
             $input['photo_id'] = $photo->id;
+        } else {
+            unset($input['photo_id']);
         }
 
         $setting->update($input);
