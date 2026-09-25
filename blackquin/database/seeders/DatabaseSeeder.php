@@ -178,6 +178,40 @@ class DatabaseSeeder extends Seeder
             'about_image' => 'about_img1_601x510.png',
             'about_ytlink' => '',
             'member_title_section' => 'People behind the partnerships.',
+
+            'hero_title_line1' => 'Rooted in our origins.',
+            'hero_title_line2' => 'Invested in your future.',
+            'hero_description' => "Connecting Indonesia's agricultural heritage with the possibilities of global trade.",
+
+            'vision_kicker' => 'Vision & mission',
+            'vision_title' => 'Growing Indonesian value in global markets.',
+            'vision_description' => 'Our ambition combines international reach with enduring value for producers, employees and surrounding communities.',
+            'vision_label' => 'Our vision',
+            'vision_statement' => 'To become a leading global agribusiness in premium Indonesian agricultural products through integrated trading and value added manufacturing.',
+
+            'value1_title' => 'Source responsibly',
+            'value1_description' => 'Develop premium products through partnerships with farmers and local suppliers.',
+            'value2_title' => 'Create more value',
+            'value2_description' => 'Build efficient, hygienic and integrated processing operations.',
+            'value3_title' => 'Serve global buyers',
+            'value3_description' => 'Deliver dependable products, professional service and lasting partnerships.',
+            'value4_title' => 'Support communities',
+            'value4_description' => 'Promote sustainable practices that benefit people and preserve resources.',
+
+            'beliefs_kicker' => 'What we believe',
+            'beliefs_title' => 'Trade begins with products. Partnership begins with trust.',
+            'belief1_title' => 'Direct sourcing',
+            'belief1_description' => 'Relationships with growers, cooperatives and trusted supply partners.',
+            'belief2_title' => 'Consistent quality',
+            'belief2_description' => 'Careful product selection, handling and preparation.',
+            'belief3_title' => 'Transparency',
+            'belief3_description' => 'Clear communication from inquiry to shipment.',
+            'belief4_title' => 'Long-term thinking',
+            'belief4_description' => 'A shared commitment to sustainable business relationships.',
+
+            'leadership_kicker' => 'Our leadership',
+            'leadership_description' => 'A shared focus on dependable supply, meaningful relationships and lasting value.',
+
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -192,7 +226,7 @@ class DatabaseSeeder extends Seeder
             'box_title1' => 'Email us', 'box_title2' => 'Call us', 'box_title3' => 'Our office',
             'box_html1' => '<p>info@samudrainternationalcommerce.com</p>',
             'box_html2' => '<p>+62 823 7953 5398</p>',
-            'box_html3' => '<p>Menara Karya, 28th Floor, Jl. HR Rasuna Said, South Jakarta 12950</p>',
+            'box_html3' => 'Menara Karya, 28th Floor<br>Jl. HR Rasuna Said Block X-5, Kav 1-2<br>South Jakarta, Indonesia 12950',
             'form_title' => "Let's have a conversation.",
             'form_input_name' => 'Full name',
             'form_input_email' => 'Business email',
@@ -204,6 +238,18 @@ class DatabaseSeeder extends Seeder
             'mailto' => 'info@samudrainternationalcommerce.com',
             'title' => 'Great partnerships start here.',
             'iframe_txt' => '',
+
+            'hero_title_line1' => 'Great partnerships',
+            'hero_title_line2' => 'start here.',
+            'hero_description' => "Tell us what your business needs. Let's explore what we can source together.",
+            'side_kicker' => 'Get in touch',
+            'side_title_line1' => 'Indonesia, to',
+            'side_title_line2' => 'wherever you are.',
+            'warehouse_address' => 'Jl. Raya Taman Adiyasa No. 6, Blok J No. 4<br>Cikuya, Solear, Tangerang, Banten 15730',
+            'hours_line1' => 'Monday–Friday · 08:00–17:00 WIB',
+            'hours_line2' => 'Saturday–Sunday · By appointment',
+            'map_link' => '#',
+
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -228,6 +274,9 @@ class DatabaseSeeder extends Seeder
             'breadcrumbs_anchor' => 'Insights',
             'html_sidebar1' => '',
             'html_sidebar2' => '',
+            'hero_title_line1' => 'Perspectives from',
+            'hero_title_line2' => 'the source.',
+            'hero_description' => 'Stories about Indonesian origins, product quality and the relationships that make international trade work.',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
@@ -277,17 +326,35 @@ class DatabaseSeeder extends Seeder
             [
                 'title' => 'The world drinks coffee every day.',
                 'slug' => 'the-world-drinks-coffee-every-day',
-                'body' => '<p>Coffee is one of the most consumed beverages on earth, and Indonesia remains one of its most distinctive origins. From the highlands of Gayo to Java, growing regions each bring their own character to the cup — placeholder article, edit from the dashboard.</p>',
+                'body' => '<h3>A character shaped by origin</h3>'
+                    . '<p>Indonesia\'s coffee regions bring different identities to a global market. Gayo, Toraja and Java each offer a distinct story of growing conditions, processing and producer knowledge. For buyers, origin is a starting point for understanding the coffee.</p>'
+                    . '<h3>Beyond the first sample</h3>'
+                    . '<p>A successful sourcing relationship needs repeatable quality. Traceability, clear grading and reliable communication help roasters plan with confidence across shipments.</p>'
+                    . '<h3>Connecting origin to opportunity</h3>'
+                    . '<p>Samudra works with farming and supply partners to connect Indonesian ingredients with international buyers. The objective is a relationship that respects origin and supports consistent supply.</p>'
+                    . '<blockquote style="border-left:3px solid var(--sic-amber);padding-left:20px;margin:28px 0;font-family:\'Manrope\',sans-serif;font-weight:700;font-size:22px;color:var(--sic-navy);">From Indonesian origins to lasting global partnerships.</blockquote>',
             ],
             [
                 'title' => 'Most import problems start before the shipment.',
                 'slug' => 'most-import-problems-start-before-the-shipment',
-                'body' => '<p>Clear specification and documentation prevent the majority of issues buyers encounter. Here is what we coordinate before any container leaves Indonesia — placeholder article, edit from the dashboard.</p>',
+                'body' => '<h3>Specification comes first</h3>'
+                    . '<p>Most issues buyers encounter trace back to unclear specification agreed before the order — grade, moisture, screen size and packaging all need to be confirmed in writing before production begins.</p>'
+                    . '<h3>Documentation, prepared early</h3>'
+                    . '<p>Certificate of Origin, phytosanitary certificates and, where relevant, Halal certification take time to prepare correctly. Coordinating them early avoids delays at the port.</p>'
+                    . '<h3>A single point of coordination</h3>'
+                    . '<p>Samudra manages sourcing, quality checks and export documentation as one connected process, so buyers have one point of contact from inquiry to shipment.</p>'
+                    . '<blockquote style="border-left:3px solid var(--sic-amber);padding-left:20px;margin:28px 0;font-family:\'Manrope\',sans-serif;font-weight:700;font-size:22px;color:var(--sic-navy);">Clear specification prevents most shipment problems.</blockquote>',
             ],
             [
                 'title' => 'Spices are easy to grow. Hard to standardize.',
                 'slug' => 'spices-are-easy-to-grow-hard-to-standardize',
-                'body' => '<p>Consistent quality across harvests and suppliers takes deliberate process. This is how we approach standardization for cassia, cloves and pepper — placeholder article, edit from the dashboard.</p>',
+                'body' => '<h3>Variation is the default</h3>'
+                    . '<p>Cassia, cloves and pepper grow across many smallholder farms, each with its own harvest timing and post-harvest handling. Left unmanaged, that variation shows up in the final product.</p>'
+                    . '<h3>Building consistency deliberately</h3>'
+                    . '<p>Consistent quality comes from deliberate process — selection at intake, controlled drying, and grading against agreed specification before packing.</p>'
+                    . '<h3>What buyers can expect</h3>'
+                    . '<p>Working with Samudra means every batch is checked against the same standard, so what arrives matches what was ordered.</p>'
+                    . '<blockquote style="border-left:3px solid var(--sic-amber);padding-left:20px;margin:28px 0;font-family:\'Manrope\',sans-serif;font-weight:700;font-size:22px;color:var(--sic-navy);">Consistent quality is a process, not an accident.</blockquote>',
             ],
         ];
 

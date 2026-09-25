@@ -147,8 +147,8 @@ class HomeController extends Controller
 
         $data['headerfooter'] = HeaderFooterSetting::find($lang_id);
         $data['setting'] = Setting::find($lang_id);
-        $data['menus'] = Menu::where('language_id', $lang_id)->get();
-        $data['posts'] = Post::where('language_id', $lang_id)->get();
+        $data['menus'] = Menu::orderBy('order')->get();
+        $data['posts'] = Post::orderBy('created_at', 'desc')->get();
         $data['blogsettings'] = BlogSetting::find($lang_id);
 
         return view('blog', $data, compact('langs'));
@@ -177,21 +177,14 @@ class HomeController extends Controller
 
     public function contactPost(Request $request){
 
-
-        $messages = [
-            'g-recaptcha-response.required' => 'You must check the reCAPTCHA.',
-            'g-recaptcha-response.captcha' => 'Captcha error! try again later or contact site admin.',
-        ];
- 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
             'budget' => 'required',
             'comment' => 'required',
-            'g-recaptcha-response' => 'required|captcha'
-        ], $messages);
- 
+        ]);
+
         if ($validator->fails()) {
             return back()
                         ->withErrors($validator)
@@ -255,7 +248,9 @@ class HomeController extends Controller
 
     public function quote()
     {
-        return view('sic.quote', $this->sicBaseData());
+        $data = $this->sicBaseData();
+        $data['products'] = \App\Models\Product::orderBy('name')->get();
+        return view('sic.quote', $data);
     }
 
     public function quotePost(Request $request)
@@ -264,10 +259,13 @@ class HomeController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'company' => 'required',
+            'destination' => 'required',
+            'product' => 'required',
+            'quantity' => 'required',
             'message' => 'required',
         ]);
 
-        return back()->with('success', 'Thanks — our export team will get back to you shortly.');
+        return back()->with('success', 'Thanks — our export team will review your request and respond shortly.');
     }
 
     public function faq()
