@@ -63,14 +63,15 @@
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
+            "@php patch-vendor.php",
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@/usr/local/bin/php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi"
         ],
         "post-root-package-install": [
-            "@/usr/local/bin/php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@/usr/local/bin/php artisan key:generate --ansi"
+            "@php artisan key:generate --ansi"
         ]
     }
 }
