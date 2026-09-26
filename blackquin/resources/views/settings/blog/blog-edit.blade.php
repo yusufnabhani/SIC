@@ -115,6 +115,24 @@
                         <!-- SEO -->
 
 
+                        <!-- Redesign: hero -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Hero banner (new site design)</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('blog-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 1</strong><input type="text" name="hero_title_line1" class="form-control" value="{{$setting->hero_title_line1}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 2</strong><input type="text" name="hero_title_line2" class="form-control" value="{{$setting->hero_title_line2}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="hero_description" class="form-control" rows="2">{{$setting->hero_description}}</textarea></div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Redesign -->
+
                         <!-- SEO -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">

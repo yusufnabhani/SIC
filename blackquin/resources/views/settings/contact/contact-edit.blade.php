@@ -272,6 +272,47 @@
                         </div>
 
 
+                        <!-- Redesign: hero -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Hero banner (new site design)</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('contact-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 1</strong><input type="text" name="hero_title_line1" class="form-control" value="{{$setting->hero_title_line1}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 2</strong><input type="text" name="hero_title_line2" class="form-control" value="{{$setting->hero_title_line2}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="hero_description" class="form-control" rows="2">{{$setting->hero_description}}</textarea></div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: get in touch sidebar -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Get in touch sidebar</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('contact-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-4"><div class="form-group"><strong>Kicker</strong><input type="text" name="side_kicker" class="form-control" value="{{$setting->side_kicker}}"></div></div>
+                                        <div class="col-md-4"><div class="form-group"><strong>Title line 1</strong><input type="text" name="side_title_line1" class="form-control" value="{{$setting->side_title_line1}}"></div></div>
+                                        <div class="col-md-4"><div class="form-group"><strong>Title line 2</strong><input type="text" name="side_title_line2" class="form-control" value="{{$setting->side_title_line2}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Warehouse address (HTML, &lt;br&gt; allowed)</strong><textarea name="warehouse_address" class="form-control" rows="2">{{$setting->warehouse_address}}</textarea></div>
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Hours line 1</strong><input type="text" name="hours_line1" class="form-control" value="{{$setting->hours_line1}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Hours line 2</strong><input type="text" name="hours_line2" class="form-control" value="{{$setting->hours_line2}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Map link</strong><input type="text" name="map_link" class="form-control" value="{{$setting->map_link}}"></div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Redesign -->
+
                         <!-- SEO -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">

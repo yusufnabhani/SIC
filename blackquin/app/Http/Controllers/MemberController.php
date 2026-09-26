@@ -35,6 +35,12 @@ class MemberController extends Controller
 
         $input = $request->all();
 
+        // These columns are NOT NULL; a blank input becomes null via
+        // Laravel's ConvertEmptyStringsToNull middleware, so coerce back to ''.
+        foreach (['facebook', 'twitter', 'linkedin'] as $field) {
+            $input[$field] = $input[$field] ?? '';
+        }
+
         if ($file = $request->file('photo_id')) {
             
             $name = time() . $file->getClientOriginalName();
@@ -66,8 +72,12 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        
+
         $input = $request->all();
+
+        foreach (['facebook', 'twitter', 'linkedin'] as $field) {
+            $input[$field] = $input[$field] ?? '';
+        }
 
         if ($file = $request->file('photo_id')) {
             

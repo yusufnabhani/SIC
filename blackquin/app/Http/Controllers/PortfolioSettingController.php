@@ -34,7 +34,7 @@ class PortfolioSettingController extends Controller
      */
     public function update(Request $request, PortfolioSetting $setting, $langid)
     {
-        $setting = PortfolioSetting::where('language_id', $langid)->firstOrFail();
+        $setting = PortfolioSetting::findOrFail($langid);
         
         $input = $request->all();
 

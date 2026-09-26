@@ -1,88 +1,56 @@
-@extends('layouts.front')
+@extends('layouts.site')
 
-@section('title') {{$post->meta_title}} @endsection
-@section('meta') {{$post->meta_description}} @endsection
-
-
+@section('title', $post->title)
+@section('meta', $post->meta_description)
 
 @section('content')
-  
-  
+<div class="sic-breadcrumb">
+    <div class="sic-container"><a href="{{ route('home') }}">Home</a> / <a href="{{ route('insights.index') }}">Insights</a> / {{ optional($post->category)->name ?? 'Insights' }}</div>
+</div>
 
+<section class="page-hero" style="padding-bottom:32px;">
+    <div class="sic-container">
+        <div class="eyebrow">{{ optional($post->category)->name ?? 'Insights' }}</div>
+        <h1 style="font-size:38px;">{{ $post->title }}</h1>
+        <div style="display:flex;gap:20px;margin-top:20px;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:rgba(255,255,255,0.6);">
+            <span>Samudra Journal</span><span>{{ $post->created_at->format('d F Y') }}</span>
+        </div>
+    </div>
+</section>
 
-   <div class="breadcrumb-area">
-   	<div class="container">
-   		 <h1 class="breadcrumb-title">{{$post->meta_title}}</h1>
+<img src="{{ $post->photo ? asset('images/media/' . $post->photo->file) : asset('images/sic/home_img9_409x264.png') }}" alt="{{ $post->title }}" style="width:100%;max-height:520px;object-fit:cover;">
 
-   		<ul class="page-list">
-            <li class="item-home"><a class="bread-link" href="{{ route('home') }}" title="Home">{{clean( trans('niva-backend.home') , array('Attr.EnableID' => true))}}</a></li>
-            <li class="separator separator-home"></li>
-            <li class="item-home"><a class="bread-link" href="{{ route('blog') }}" title="Home">{{clean( trans('niva-backend.our_news') , array('Attr.EnableID' => true))}}</a></li>
-            <li class="separator separator-home"></li>
-            <li class="item-current">{{$post->meta_title}}</li>
-        </ul>
-   	</div>
-   </div>
+<section class="section">
+    <div class="sic-container" style="max-width:780px;">
+        <div style="font-size:17px;line-height:1.8;color:var(--sic-text-muted);">
+            {!! $post->body !!}
+        </div>
+        <a href="{{ route('insights.index') }}" class="link-arrow" style="display:inline-block;margin-top:32px;">&larr; Back to insights</a>
+    </div>
+</section>
 
-   <div class="post-content blog-page-section">
-   		<div class="container">
-   			<div class="row">
+@if($related->count())
+<section class="section section-tint">
+    <div class="sic-container">
+        <div class="section-head"><h2 class="section-title">Keep exploring.</h2></div>
+        <div class="grid-3">
+            @foreach($related as $r)
+                <a class="insight-card" href="{{ url('/post/' . $r->slug) }}">
+                    <div class="insight-card__img"><img src="{{ $r->photo ? asset('images/media/' . $r->photo->file) : asset('images/sic/home_img10_409x264.png') }}" alt="{{ $r->title }}"></div>
+                    <div class="insight-card__meta"><span>{{ optional($r->category)->name ?? 'Insights' }}</span><span>{{ $r->created_at->format('d M Y') }}</span></div>
+                    <h3>{{ $r->title }}</h3>
+                    <span class="link-arrow">Read story &#8599;</span>
+                </a>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
 
-   				<div class="col-md-8">
-   					<article class="single-post blogloop-v2">
-	                   <div class="blog_custom">
-	                      <div class="post-thumbnail">
-	                         <a href="{{URL::to('/')}}/post/{{$post->slug}}">
-	                            <img class="blog_post_image img-fluid lazy" width="800" height="550" src="/public/img/loading-blog.gif" data-src="{{$post->photo ? '/public/images/media/' . $post->photo->file : '/public/img/200x200.png'}}" alt="{{$post->title}}">
-	                          </a>
-	                      </div>
-	                      <span class="post-date">{{ date('d.M.Y', strtotime($post->created_at)) }}</span>
-	                      <!-- POST DETAILS -->
-	                      <div class="post-details">
-	                         <div class="post-details-holder">
-	                            <div class="post-author-avatar">
-	                               <img alt="" src="/public/img/loading-blog.gif" data-src="{{$post->user->photo ? '/public/images/media/' . $post->user->photo->file : '/public/img/200x200.png'}}" class="avatar img-fluid lazy" height="120" width="120">
-	                             </div>
-	                            
-	                            <h2 class="post-name">
-	                                  {{$post->title}}                   
-	                          
-	                            </h2>
-
-	                            <div class="post-category-comment-date">
-	                               <span class="post-tags"><i class="fa fa-tag"></i>{{$post->category->name}}</span>
-	                            </div>
-
-	                            <div class="post-body">
-	                               {!! $post->body !!}
-	                            </div>
-	                         </div>
-	                      </div>
-	                   </div>
-	                </article>
-   				</div>
-
-   				<div class="col-md-4">
-                
-	                <div class="widget_element">
-	                   {!!$blogsettings->html_sidebar1!!}
-	                </div>
-
-	                <div class="widget_element">
-	                   {!!$blogsettings->html_sidebar2!!}
-	                </div>
-
-	            </div>
-
-			</div>
-
-
-
-   		</div>
-   		
-   	</div>
-
-
-
+<section class="section-dark">
+    <div class="sic-container cta-banner">
+        <h2>Your next great ingredient starts with a conversation.</h2>
+        <a href="{{ route('quote') }}" class="btn btn-amber">Talk to our export team &#8599;</a>
+    </div>
+</section>
 @endsection
-

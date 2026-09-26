@@ -199,6 +199,99 @@
                         </div>
                         <!-- clients -->
 
+                        <!-- Redesign: hero -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Hero banner (new site design)</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('about-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 1</strong><input type="text" name="hero_title_line1" class="form-control" value="{{$setting->hero_title_line1}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title line 2</strong><input type="text" name="hero_title_line2" class="form-control" value="{{$setting->hero_title_line2}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="hero_description" class="form-control" rows="2">{{$setting->hero_description}}</textarea></div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: vision -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Vision &amp; mission</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('about-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Kicker</strong><input type="text" name="vision_kicker" class="form-control" value="{{$setting->vision_kicker}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title</strong><input type="text" name="vision_title" class="form-control" value="{{$setting->vision_title}}"></div></div>
+                                    </div>
+                                    <div class="form-group"><strong>Description</strong><textarea name="vision_description" class="form-control" rows="2">{{$setting->vision_description}}</textarea></div>
+                                    <div class="form-group"><strong>Statement label (e.g. "Our vision")</strong><input type="text" name="vision_label" class="form-control" value="{{$setting->vision_label}}"></div>
+                                    <div class="form-group"><strong>Vision statement</strong><textarea name="vision_statement" class="form-control" rows="2">{{$setting->vision_statement}}</textarea></div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: values -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Our values (4 cards)</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('about-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    @for ($i = 1; $i <= 4; $i++)
+                                        <div class="row">
+                                            <div class="col-md-4"><div class="form-group"><strong>Value {{ $i }} title</strong><input type="text" name="value{{ $i }}_title" class="form-control" value="{{ $setting->{'value'.$i.'_title'} }}"></div></div>
+                                            <div class="col-md-8"><div class="form-group"><strong>Value {{ $i }} description</strong><input type="text" name="value{{ $i }}_description" class="form-control" value="{{ $setting->{'value'.$i.'_description'} }}"></div></div>
+                                        </div>
+                                    @endfor
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: beliefs -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">What we believe (4 cards)</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('about-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Kicker</strong><input type="text" name="beliefs_kicker" class="form-control" value="{{$setting->beliefs_kicker}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Title</strong><input type="text" name="beliefs_title" class="form-control" value="{{$setting->beliefs_title}}"></div></div>
+                                    </div>
+                                    @for ($i = 1; $i <= 4; $i++)
+                                        <div class="row">
+                                            <div class="col-md-4"><div class="form-group"><strong>Belief {{ $i }} title</strong><input type="text" name="belief{{ $i }}_title" class="form-control" value="{{ $setting->{'belief'.$i.'_title'} }}"></div></div>
+                                            <div class="col-md-8"><div class="form-group"><strong>Belief {{ $i }} description</strong><input type="text" name="belief{{ $i }}_description" class="form-control" value="{{ $setting->{'belief'.$i.'_description'} }}"></div></div>
+                                        </div>
+                                    @endfor
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Redesign: leadership -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3"><h6 class="m-0 font-weight-bold text-dark">Leadership section intro</h6></div>
+                            <div class="card-body">
+                                <form action="{{route('about-setting.update', $setting->id)}}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="row">
+                                        <div class="col-md-6"><div class="form-group"><strong>Kicker</strong><input type="text" name="leadership_kicker" class="form-control" value="{{$setting->leadership_kicker}}"></div></div>
+                                        <div class="col-md-6"><div class="form-group"><strong>Description</strong><input type="text" name="leadership_description" class="form-control" value="{{$setting->leadership_description}}"></div></div>
+                                    </div>
+                                    <div class="text-right"><button type="submit" class="btn btn-primary">{{clean( trans('niva-backend.update') , array('Attr.EnableID' => true))}}</button></div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /Redesign -->
+
                         <!-- SEO -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">

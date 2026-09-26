@@ -1,95 +1,61 @@
-@extends('layouts.front')
+@extends('layouts.site')
 
-@section('title') {{$blogsettings->meta_title}} @endsection
-@section('meta') {{$blogsettings->meta_description}} @endsection
-
-
+@section('title', 'Insights')
+@section('meta', $blogsettings->meta_description ?? 'Stories about Indonesian origins, product quality and the relationships that make international trade work.')
 
 @section('content')
-  
- 
+<div class="sic-breadcrumb">
+    <div class="sic-container"><a href="{{ route('home') }}">Home</a> / {{ $blogsettings->breadcrumbs_anchor ?? 'Insights' }}</div>
+</div>
 
-   <div class="banner-section" data-background-image-url="{{$blogsettings->banner_img ? $blogsettings->banner_img : '/public/img/200x200.png'}}">
+<section class="page-hero">
+    <div class="sic-container">
+        <div class="eyebrow">Insights</div>
+        <h1>{{ $blogsettings->hero_title_line1 ?? 'Perspectives from' }}<br><span class="accent">{{ $blogsettings->hero_title_line2 ?? 'the source.' }}</span></h1>
+        <p>{{ $blogsettings->hero_description ?? 'Stories about Indonesian origins, product quality and the relationships that make international trade work.' }}</p>
+    </div>
+</section>
 
-        <div class="container">
-            <h1 class="banner-title">{!!$blogsettings->banner_title!!}</h1>
-            <p class="banner-desc">{!!$blogsettings->banner_desc!!}</p>
-        </div>
+@php $featured = $posts->first(); $rest = $posts->slice(1); @endphp
 
-        <div class="header-social-share">
-            {!!$headerfooter->social_links!!}
-        </div>
-
-        <a href="#" class="hero__scroll"><svg width="15" height="22.1"><use xlink:href="#scroll"></use></svg></a>
-       
-   </div>
-
-   <div class="blog-page-section">
-      <div class="container">
-        <div class="row">
-            
-            <div class="col-md-8">
-                
-            @foreach($posts as $post)
-                <article class="single-post blogloop-v2">
-                   <div class="blog_custom">
-                      <div class="post-thumbnail">
-                         <a href="{{URL::to('/')}}/post/{{$post->slug}}">
-                            <img class="blog_post_image img-fluid lazy" width="800" height="550" src="/public/img/loading-blog.gif" data-src="{{$post->photo ? '/public/images/media/' . $post->photo->file : '/public/img/200x200.png'}}" alt="{{$post->title}}">
-                          </a>
-                      </div>
-                      <span class="post-date">{{ date('M d, Y', strtotime($post->created_at)) }}</span>
-                      <!-- POST DETAILS -->
-                      <div class="post-details">
-                         <div class="post-details-holder">
-                            <div class="post-author-avatar">
-                               <img alt="" src="/public/img/loading-blog.gif" data-src="{{$post->user->photo ? '/public/images/media/' . $post->user->photo->file : '/public/img/200x200.png'}}" class="avatar img-fluid lazy" height="120" width="120">
-                             </div>
-                            
-                            <h2 class="post-name">
-                               <a title="{{$post->title}}" href="{{URL::to('/')}}/post/{{$post->slug}}">
-                                  {{$post->title}}                   
-                               </a>
-                            </h2>
-
-                            <div class="post-category-comment-date">
-                               <span class="post-tags"><i class="fa fa-tag"></i>{{$post->category->name}}</span>
-                            </div>
-
-                            <div class="post-excerpt">
-                               <p>{{$post->meta_description}}</p>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                </article>
-            @endforeach
-
-
-
-
-            </div> <!-- col 8 -->
-
-            <div class="col-md-4">
-                
-                <div class="widget_element">
-                   {!!$blogsettings->html_sidebar1!!}
-                </div>
-
-                <div class="widget_element">
-                   {!!$blogsettings->html_sidebar2!!}
-                </div>
-
+@if($featured)
+<section class="section-tight">
+    <div class="sic-container">
+        <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:0;background:var(--sic-blue-tint);">
+            <div><img src="{{ $featured->photo ? asset('images/media/' . $featured->photo->file) : asset('images/sic/home_img9_409x264.png') }}" alt="{{ $featured->title }}" style="width:100%;height:100%;object-fit:cover;"></div>
+            <div style="padding:48px;display:flex;flex-direction:column;justify-content:center;">
+                <div class="eyebrow">Featured insight</div>
+                <h2 class="section-title" style="font-size:28px;margin-bottom:14px;">{{ $featured->title }}</h2>
+                <p style="color:var(--sic-text-muted);margin-bottom:20px;">{{ \Illuminate\Support\Str::limit(trim(preg_replace('/\s+/', ' ', strip_tags(str_replace(['<', '</'], [' <', ' </'], $featured->body)))), 140) }}</p>
+                <a href="{{ url('/post/' . $featured->slug) }}" class="link-arrow">Read the story &#8599;</a>
             </div>
-
         </div>
-      </div>
-   </div>
-   
- 
+    </div>
+</section>
+@endif
 
+<section class="section">
+    <div class="sic-container">
+        <div class="section-head"><h2 class="section-title">Latest perspectives</h2><span style="color:var(--sic-text-muted);font-size:14px;">From the Samudra journal</span></div>
+        <div class="grid-3">
+            @forelse($rest as $post)
+                <a class="insight-card" href="{{ url('/post/' . $post->slug) }}">
+                    <div class="insight-card__img"><img src="{{ $post->photo ? asset('images/media/' . $post->photo->file) : asset('images/sic/home_img10_409x264.png') }}" alt="{{ $post->title }}"></div>
+                    <div class="insight-card__meta"><span>{{ optional($post->category)->name ?? 'Insights' }}</span><span>{{ $post->created_at->format('d M Y') }}</span></div>
+                    <h3>{{ $post->title }}</h3>
+                    <span class="link-arrow">Read story &#8599;</span>
+                </a>
+            @empty
+                <p style="color:var(--sic-text-muted);">More stories coming soon.</p>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+<section class="section-dark">
+    <div class="sic-container cta-banner">
+        <h2>Your next great ingredient starts with a conversation.</h2>
+        <a href="{{ route('quote') }}" class="btn btn-amber">Talk to our export team &#8599;</a>
+    </div>
+</section>
 @endsection
-
-
-
-

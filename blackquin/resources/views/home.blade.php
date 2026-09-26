@@ -1,328 +1,185 @@
-@extends('layouts.front')
+@extends('layouts.site')
 
-@section('title') {{$homesetting->meta_title}} @endsection
-@section('meta') {{$homesetting->meta_description}} @endsection
-
+@section('title', 'Home')
+@section('meta', $homesetting->meta_description ?? "Exceptional Indonesian coffee, spices and botanicals.")
 
 @section('content')
 
-
-
-    <div class="slider-venor-section">
-        <div class="slider-venor owl-carousel">
-            
-            @php $count = 0; @endphp
-            @foreach( $sliders as $slido )
-            
-            <div class="slider-inner-venor"  data-background-image-url="{{$slido->photo ? '/public/images/media/' . $slido->photo->file : '/public/img/200x200.png'}}">
-                
-                <div class="container">
-                   
-                    <div class="slider-content">
-                       <h1 @if( $count == 0 ) class="active" @endif>{!!$slido->heading1!!} </h1>
-                       <h2 @if( $count == 0 ) class="active" @endif>{!!$slido->heading2!!}</h2>
-
-                     
-
-                       <div class="slider-body  @if( $count == 0 ) active @endif">{!!$slido->bodyslider!!}</div>
-                       
-                        @if($slido->button_text)
-                            <div class="button-slider-b">
-                                <a href="{!!$slido->button_link!!}" target="_self" class="btn btn-slider"><span>{!!$slido->button_text!!}</span><svg width="11.4" height="9.2"> <use xlink:href="#arrow"></use></svg></a>
-                            </div>
-                        @endif
-
-                        @if($slido->button_text2)
-                            <div class="button-slider-b">
-                                <a href="{!!$slido->button_link2!!}" target="_self" class="btn btn-slider"><span>{!!$slido->button_text2!!}</span><svg width="11.4" height="9.2"> <use xlink:href="#arrow"></use></svg></a>
-                            </div>
-                        @endif
-                       
-                    </div>
+{{-- HERO --}}
+<section class="sic-hero">
+    <div class="sic-container">
+        <div class="sic-hero__grid">
+            <div>
+                <div class="lede">{{ $homesetting->hero_kicker ?? 'Rooted in Indonesia. Ready for the world.' }}</div>
+                <h1>{{ $homesetting->hero_title_line1 ?? 'From our land.' }}<br>{{ $homesetting->hero_title_line2 ?? 'To your world.' }}</h1>
+                <p class="desc">{{ $homesetting->hero_description ?? 'Exceptional Indonesian coffee, spices, and botanicals. Responsibly sourced. Thoughtfully delivered.' }}</p>
+                <div class="sic-hero__actions">
+                    <a href="{{ $homesetting->hero_button1_link ?? route('products.index') }}" class="btn btn-amber">{{ $homesetting->hero_button1_text ?? 'Explore our products' }} &#8599;</a>
+                    <a href="{{ $homesetting->hero_button2_link ?? route('about') }}" class="btn btn-outline-light">{{ $homesetting->hero_button2_text ?? 'Discover Samudra' }}</a>
                 </div>
             </div>
-
-            @php $count++; @endphp
-
-            @endforeach
-        
+            <div>
+                <img src="{{ $homesetting->hero_image ? asset('images/sic/' . $homesetting->hero_image) : asset('images/sic/home_img1_749x662.png') }}" alt="Indonesian coffee, spices and botanicals">
+            </div>
         </div>
 
-        <div class="header-social-share">
-            {!!$headerfooter->social_links!!}
-        </div>
-
-        <a href="#" class="hero__scroll"><svg width="15" height="22.1"><use xlink:href="#scroll"></use></svg></a>
-    </div>
-
-    
-
-    <div class="about-section light-section">
-        <div class="container">
-            <div class="row">
-               
-                <div class="col-md-6">
-                    
-              
-                    <div class="item-about">
-
-                        <div class="item-about-row">
-                            <div class="item-about-img2">
-                                <div class="avo-image avo-tooltip about-img3 big-paral">
-                                    <div class="simpleParallax imago" data-tooltip-tit="{{$homesetting->about_image3_titlu1}}" data-tooltip-sub="{{$homesetting->about_image3_titlu2}}"><img src="/public/img/loading-blog.gif" width="500" height="666" class="lazy thumparallax-down img-fluid" data-src="{{$homesetting->about_image3}}" alt="about-us" /></div>
-                                </div>
-                            </div>
-                            
-                            <div class="item-about-img1">
-                                <div class="avo-image avo-tooltip about-img1 big-paral">
-                                    <div class="simpleParallax imago" data-tooltip-tit="{{$homesetting->about_image2_titlu1}}" data-tooltip-sub="{{$homesetting->about_image2_titlu2}}"><img src="/public/img/loading-blog.gif" width="500" height="666" class="lazy thumparallax-down img-fluid" data-src="{{$homesetting->about_image2}}" alt="about-us" /></div>
-                                </div>
-                                <div class="avo-image avo-tooltip about-img2 big-paral">
-                                    <div class="simpleParallax imago" data-tooltip-tit="{{$homesetting->about_image1_titlu1}}" data-tooltip-sub="{{$homesetting->about_image1_titlu2}}"><img src="/public/img/loading-blog.gif" width="500" height="666" class="lazy thumparallax-down img-fluid" data-src="{{$homesetting->about_image1}}" alt="about-us" /></div>
-                                </div>
-                            </div>
-                        </div>
-                       
-
-                        <div class="exp-about">
-                            <h5 class="nmb-font-about">{{$homesetting->about_yearstitle}}</h5>
-                            <h6 class="service_summary-about">{{$homesetting->about_yearstext}}</h6>
-                        </div>
-
-                    </div>
-
-                 
-
-                </div>
-
-
-                <div class="col-md-6">
-
-                    <h4 class="about-heading1-home">{!!$homesetting->about_subtitle!!}</h4>
-                    <h3 class="about-heading2-home">{!!$homesetting->about_title!!}</h3>
-
-                    {!!$homesetting->about_description!!}
-
-                    <a href="{{$homesetting->about_buttonlink}}" target="_self" class="btn btn-style1"><span>{{$homesetting->about_buttontext}}</span><svg width="11.4" height="9.2"> <use xlink:href="#arrow"></use></svg></a>
-
-                </div>
-
-
+        <div class="value-strip">
+            <div class="value-card">
+                <div><div class="value-card__icon"><i class="fas fa-location-arrow" style="color:#fff;"></i></div><div class="value-card__title">{{ $homesetting->value1_title ?? 'Direct sourcing network' }}</div></div>
+            </div>
+            <div class="value-card">
+                <div><div class="value-card__icon"><i class="fas fa-award" style="color:#fff;"></i></div><div class="value-card__title">{{ $homesetting->value2_title ?? 'Consistent product quality' }}</div></div>
+            </div>
+            <div class="value-card">
+                <div><div class="value-card__icon"><i class="fas fa-shield-alt" style="color:#fff;"></i></div><div class="value-card__title">{{ $homesetting->value3_title ?? 'Transparent partnership' }}</div></div>
+            </div>
+            <div class="value-card">
+                <div><div class="value-card__icon"><i class="fas fa-handshake" style="color:#fff;"></i></div><div class="value-card__title">{{ $homesetting->value4_title ?? 'Long-term commitment' }}</div></div>
             </div>
         </div>
     </div>
+</section>
 
-
-    <div class="services-section">
-        <div class="container">
-            
-            <h3>{!!$homesetting->services_title!!}</h3>
-
-            <div class="description-services">{!!$homesetting->sevices_text!!}</div>
-
-            <div class="service-boxes-slider owl-carousel">
-                
-                @foreach( $services as $service )
-
-                <div class="card-parent">
-                    <div class="card-inner-row">
-                        <div class="card featured to-top-left">
-                            <div class="heading-wrapper">
-                                <h4 class="heading">{!!$service->icon!!} {{$service->title}}</h4>
-                            </div> 
-            
-                            <div class="paragraph-wrapper">
-                                <p class="paragraph">{{$service->description}}</p>
-                            </div>
-
-                            <div class="project-button">
-                                <a href="{{$service->button_link}}" title="{{$service->title}}"><span>{{$service->button_text}}</span><svg viewBox="0 0 80 80"><polyline points="19.89 15.25 64.03 15.25 64.03 59.33"></polyline><line x1="64.03" y1="15.25" x2="14.03" y2="65.18"></line></svg></a>
-                            </div>
-
-                        </div>
-                        <div class="card-img">
-                            <img class="img-fluid project-image lazy" width="400" height="400" src="/public/img/loading-blog.gif " data-src="{{$service->photo ? '/public/images/media/' . $service->photo->file : '/public/img/200x200.png'}}" alt="{{$service->title}}">
-                        </div>
+{{-- PRODUCT PORTFOLIO --}}
+<section class="section">
+    <div class="sic-container">
+        <div class="section-head">
+            <div>
+                <div class="eyebrow">Our product portfolio</div>
+                <h2 class="section-title">Nature&rsquo;s finest.<br>Selected with purpose.</h2>
+            </div>
+            <a href="{{ route('products.index') }}" class="link-arrow">View all products &#8599;</a>
+        </div>
+        <div class="grid-3">
+            @forelse($featuredProducts as $product)
+                <a class="product-card" href="{{ route('products.show', $product->slug) }}">
+                    <div class="product-card__img">
+                        <span class="product-card__badge">Indonesian origin</span>
+                        <img src="{{ $product->image ? asset('images/sic/' . $product->image) : asset('images/sic/coffee.png') }}" alt="{{ $product->name }}">
                     </div>
-                </div>
+                    <h3>{{ $product->name }} <span>&#8599;</span></h3>
+                    <p class="muted">{{ $product->botanical_name }}</p>
+                </a>
+            @empty
+                <p style="color:var(--sic-text-muted);">Products coming soon.</p>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+{{-- STORY / VIDEO --}}
+<section class="section section-tint">
+    <div class="sic-container">
+        <div class="section-head">
+            <div>
+                <div class="eyebrow">{{ $homesetting->story_kicker ?? 'Inside Samudra' }}</div>
+                <h2 class="section-title">{{ $homesetting->story_title ?? 'See the story behind the source.' }}</h2>
+            </div>
+            <p style="max-width:360px;color:var(--sic-text-muted);">{{ $homesetting->story_description ?? 'Take a closer look at the ingredients, people, and partnerships that connect Indonesia with the world.' }}</p>
+        </div>
+        <a href="{{ $homesetting->story_video_link ?? '#' }}" target="_blank" class="story-media" style="background-image:url('{{ $homesetting->story_image ? asset('images/sic/' . $homesetting->story_image) : asset('images/sic/home_img7_1282x583.png') }}');">
+            <div class="story-media__content">
+                <div class="play-btn"><i class="fas fa-play"></i></div>
+                <div style="font-weight:700;font-size:18px;">From Indonesia to the world</div>
+                <div style="font-size:13px;opacity:0.8;margin-top:6px;">Watch on YouTube</div>
+            </div>
+        </a>
+    </div>
+</section>
+
+{{-- PARTNERSHIP --}}
+<section class="section">
+    <div class="sic-container two-col">
+        <img src="{{ $homesetting->partner_image ? asset('images/sic/' . $homesetting->partner_image) : asset('images/sic/home_img8_601x510.png') }}" alt="More than an export partner">
+        <div>
+            <div class="eyebrow">{{ $homesetting->partner_kicker ?? 'More than an export partner' }}</div>
+            <h2 class="section-title" style="margin-bottom:16px;">{{ $homesetting->partner_title ?? 'Good products. Even better partnerships.' }}</h2>
+            <p style="color:var(--sic-text-muted);margin-bottom:8px;">{{ $homesetting->partner_description ?? 'We connect trusted Indonesian farmers, cooperatives and producers with businesses around the world. With care at every step, from responsible sourcing to export preparation.' }}</p>
+            <div class="mini-points">
+                <div><div class="pt-label">{{ $homesetting->partner_point1_title ?? 'Close to the source' }}</div><div class="pt-desc">{{ $homesetting->partner_point1_text ?? "Built on relationships with Indonesia's growing communities." }}</div></div>
+                <div><div class="pt-label">{{ $homesetting->partner_point2_title ?? 'Focused on your business' }}</div><div class="pt-desc">{{ $homesetting->partner_point2_text ?? 'Clear specifications and a collaborative approach to sourcing.' }}</div></div>
+            </div>
+            <a href="{{ $homesetting->partner_buttonlink ?? route('about') }}" class="link-arrow" style="display:inline-block;margin-top:24px;">{{ $homesetting->partner_buttontext ?? 'Get to know Samudra' }} &#8599;</a>
+        </div>
+    </div>
+</section>
+
+{{-- INSIGHTS --}}
+<section class="section section-tint">
+    <div class="sic-container">
+        <div class="section-head">
+            <div>
+                <div class="eyebrow">{{ $homesetting->insights_kicker ?? 'From origin to opportunity' }}</div>
+                <h2 class="section-title">A closer look at our world.</h2>
+            </div>
+            <a href="{{ route('insights.index') }}" class="link-arrow">Explore insights &#8599;</a>
+        </div>
+        <div class="grid-3">
+            @php $fallbackImgs = ['home_img9_409x264.png','home_img10_409x264.png','home_img11_409x264.png']; @endphp
+            @forelse($latestPosts as $i => $post)
+                <a class="insight-card" href="{{ url('/post/' . $post->slug) }}">
+                    <div class="insight-card__img"><img src="{{ $post->photo ? asset('images/media/' . $post->photo->file) : asset('images/sic/' . $fallbackImgs[$i % 3]) }}" alt="{{ $post->title }}"></div>
+                    <div class="insight-card__meta"><span>{{ optional($post->category)->name ?? 'Insights' }}</span><span>{{ $post->created_at->format('d M Y') }}</span></div>
+                    <h3>{{ $post->title }}</h3>
+                    <span class="link-arrow">Read story &#8599;</span>
+                </a>
+            @empty
+                @foreach([
+                    ['Coffee & origin', 'The world drinks coffee every day.', 'home_img9_409x264.png'],
+                    ['Export & import', 'Most import problems start before the shipment.', 'home_img10_409x264.png'],
+                    ['Quality & sourcing', 'Spices are easy to grow. Hard to standardize.', 'home_img11_409x264.png'],
+                ] as $fallback)
+                    <a class="insight-card" href="{{ route('insights.index') }}">
+                        <div class="insight-card__img"><img src="{{ asset('images/sic/' . $fallback[2]) }}" alt="{{ $fallback[1] }}"></div>
+                        <div class="insight-card__meta"><span>{{ $fallback[0] }}</span></div>
+                        <h3>{{ $fallback[1] }}</h3>
+                        <span class="link-arrow">Read story &#8599;</span>
+                    </a>
                 @endforeach
-
-            </div> 
-     
+            @endforelse
         </div>
     </div>
+</section>
 
-
-     <div class="fun-facts-section light-section" id="fun-facts">
-        <div class="container">
-
-            <h3 class="fun-facts-heading1">{{$homesetting->fun_title}}</h3>
-
-            <p>{{$homesetting->fun_description}}</p>
-
-            <div class="row fun-facts-timer">
-                <div class="col-md-3">
-                    <div class="radial">
-                        <div class="radial-icon">{!!$homesetting->count_icon1!!}</div>
-                        <span class="timer" data-from="0" data-to="{{$homesetting->count_number1}}" data-speed="4000">{{$homesetting->count_number1}}</span>
-                        <h4>{{$homesetting->count_description1}}</h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="radial">
-                        <div class="radial-icon">{!!$homesetting->count_icon2!!}</div>
-                        <span class="timer" data-from="0" data-to="{{$homesetting->count_number2}}" data-speed="4000">{{$homesetting->count_number2}}</span>
-                        <h4>{{$homesetting->count_description2}}</h4>
-                    </div>
-                    
-                </div>
-                <div class="col-md-3">
-                    <div class="radial">
-                        <div class="radial-icon">{!!$homesetting->count_icon3!!}</div>
-                        <span class="timer" data-from="0" data-to="{{$homesetting->count_number3}}" data-speed="4000">{{$homesetting->count_number3}}</span>
-                        <h4>{{$homesetting->count_description3}}</h4>
-                    </div>
-                    
-                </div>
-                <div class="col-md-3">
-                    <div class="radial">
-                        <div class="radial-icon">{!!$homesetting->count_icon4!!}</div>
-                        <span class="timer" data-from="0" data-to="{{$homesetting->count_number4}}" data-speed="4000">{{$homesetting->count_number4}}</span>
-                        <h4>{{$homesetting->count_description4}}</h4>
-                    </div>
-                </div>
+{{-- PROCESS --}}
+<section class="section">
+    <div class="sic-container">
+        <div class="section-head">
+            <div>
+                <div class="eyebrow">{{ $homesetting->process_kicker ?? 'How we deliver' }}</div>
+                <h2 class="section-title">{{ $homesetting->process_title ?? 'From trusted origins to export-ready supply.' }}</h2>
             </div>
-
-
+            <p style="max-width:360px;color:var(--sic-text-muted);">{{ $homesetting->process_description ?? 'Direct sourcing, selected in-house processing, quality control and professional export coordination form one connected approach.' }}</p>
         </div>
-    </div>
-
-     <div class="portfolio-section">
-        <div class="container">
-            <h4>{{$homesetting->projects_subtitle}}</h4>
-            <h3>{!!$homesetting->projects_title!!}</h3>
-
-
-
-            <div class="portfolio-slider owl-carousel">
-                
-                @foreach($projects as $key=>$project)
-                    
-                    <div class="portfolio-slider-inner">
-                
-                            <div class="project-box-div"> 
-                                @php $count = $key + 1 @endphp
-                                <a href="{{URL::to('/')}}/project/{{$project->slug}}" title="{{$project->title}}">
-                                       <img class="img-fluid project-image lazy" width="400" height="400" src="/public/img/loading-blog.gif " data-src="{{$project->photo ? '/public/images/media/' . $project->photo->file : '/public/img/200x200.png'}}" alt="{{$project->title}}">
-                                </a>
-                                <div class="project-meta">
-                                    <div class="project-number">
-                                        <span>0{{$count}}</span>
-                                    </div>
-                                    <div class="project-category">
-                                        <span class="block_text">{{$project->project_category->name}} </span>
-                                    </div>
-                                    <div class="project-meta-title">
-                                        <a href="{{URL::to('/')}}/project/{{$project->slug}}" title="{{$project->title}}"><span class="project__text">{{$project->title}}</span></a>
-                                    </div>
-                                    <div class="project-button">
-                                        <a href="{{URL::to('/')}}/project/{{$project->slug}}" title="{{$project->title}}"><span>{{clean( trans('niva-backend.view_project') , array('Attr.EnableID' => true))}}</span><svg viewBox="0 0 80 80"><polyline points="19.89 15.25 64.03 15.25 64.03 59.33"></polyline><line x1="64.03" y1="15.25" x2="14.03" y2="65.18"></line></svg></a>
-                                    </div>
-                                </div>
-                            </div>
-                       
-                    </div>
-
-                    @if ($key == 3)
-                        @break
-                    @endif
-
-
-                @endforeach
-
-            
+        <div class="grid-3">
+            <div class="step-card">
+                <div class="step-num">01</div>
+                <h3>{{ $homesetting->step1_title ?? 'Source & process' }}</h3>
+                <p>{{ $homesetting->step1_description ?? 'Work with Indonesian growers and prepare selected ingredients in the forms buyers need.' }}</p>
+                <a href="{{ $homesetting->step1_linkurl ?? route('approach') }}">{{ $homesetting->step1_linktext ?? 'Our approach' }} &#8599;</a>
+            </div>
+            <div class="step-card">
+                <div class="step-num">02</div>
+                <h3>{{ $homesetting->step2_title ?? 'Check & document' }}</h3>
+                <p>{{ $homesetting->step2_description ?? 'Review product quality and coordinate the documentation needed for the trade.' }}</p>
+                <a href="{{ $homesetting->step2_linkurl ?? route('quality') }}">{{ $homesetting->step2_linktext ?? 'Quality & compliance' }} &#8599;</a>
+            </div>
+            <div class="step-card">
+                <div class="step-num">03</div>
+                <h3>{{ $homesetting->step3_title ?? 'Partner & deliver' }}</h3>
+                <p>{{ $homesetting->step3_description ?? 'Align on the specification, destination and commercial terms with each buyer.' }}</p>
+                <a href="{{ $homesetting->step3_linkurl ?? route('quote') }}">{{ $homesetting->step3_linktext ?? 'Start a conversation' }} &#8599;</a>
             </div>
         </div>
     </div>
+</section>
 
-    
-
-
-    <div class="testimonial-section light-section">
-
-        <div class="container">
-
-            <h3>{{$homesetting->testimonial_title}}</h3>
-            <p>{{$homesetting->testimonial_subtitle}}</p>
-
-            <div class="testimonial-section-slider owl-carousel">
-
-                @foreach($testimonials as $testimonial)
-                <blockquote class="testimonial-slide">
-                    <div class="testimonial-layout1">
-                        <div class="item-figure">
-                            <img class="img-fluid" width="90" height="90" src="{{$testimonial->profile_pic ? $testimonial->profile_pic : '/public/img/200x200.png'}}" alt="">
-                        </div>
-                        <div class="item-content">
-                            <h3 class="item-title">{{$testimonial->name}}</h3>
-                            <div class="item-sub-title">{{$testimonial->position}}</div>
-                            <div class="item-paragraph">{!!$testimonial->description!!}</div>
-                        </div>
-                    </div>
-                </blockquote>
-                @endforeach
-
-            </div>
-
-        </div>
-
+{{-- CTA --}}
+<section class="section-dark">
+    <div class="sic-container cta-banner">
+        <h2>{{ $homesetting->cta_title_line1 ?? "Let's grow together." }}<br>{{ $homesetting->cta_title_line2 ?? 'Your next great ingredient starts with a conversation.' }}</h2>
+        <a href="{{ $homesetting->cta_buttonlink ?? route('quote') }}" class="btn btn-amber">{{ $homesetting->cta_buttontext ?? 'Talk to our export team' }} &#8599;</a>
     </div>
-
-    <div class="blog-section">
-
-        <div class="container">
-
-            <h3 class="blog-section-subtitle">{!!$homesetting->blog_subtitle!!}</h3>
-            <h3 class="blog-section-title">{!!$homesetting->blog_title!!}</h3>
-
-            <div class="row">
-
-                @foreach($posts as $post)
-                <div class="col-md-4">
-                    <article class="blog-single-post">
-
-                        <div class="after-bg">
-                           <img class="lazy blog_post_image img-fluid" width="370" height="380" src="https://cdn.dribbble.com/users/105033/screenshots/1132714/loading-animation-800.gif" data-src="{{$post->photo ? '/public/images/media/' . $post->photo->file : '/public/img/200x200.png'}}" alt="{{$post->title}}">
-                        </div>
-                        <div class="blog-item">
-                           <div class="box-content p-relative">
-                              <div class="box-content-body">
-                                <div class="entry-meta">
-                                    <div class="entry-date"><span>  {{ date('M d, Y', strtotime($post->created_at)) }} </span></div>
-                                </div>
-                                <h2 class="title-block">
-                                    <a href="{{URL::to('/')}}/post/{{$post->slug}}" title="{{$post->title}}">{{$post->title}}</a>
-                                 </h2>
-                                <div class="block-desc"><p>{{$post->meta_description}}</p></div>
-                                <div class="project-button">
-                                    <a href="{{URL::to('/')}}/post/{{$post->slug}}" title="{{$post->title}}"><span>{{clean( trans('niva-backend.load_more') , array('Attr.EnableID' => true))}}</span><svg viewBox="0 0 80 80"><polyline points="19.89 15.25 64.03 15.25 64.03 59.33"></polyline><line x1="64.03" y1="15.25" x2="14.03" y2="65.18"></line></svg></a>
-                                </div>
-                              </div>
-                           </div>
-                        </div>
-
-                    </article>
-                </div>
-                @endforeach
-
-                
-            </div>
-
-        </div>
-
-    </div>
-
-
+</section>
 
 @endsection
-

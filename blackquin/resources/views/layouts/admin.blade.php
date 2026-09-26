@@ -165,6 +165,9 @@
                         <a class="collapse-item" href="{{ route('member.index') }}?language=@php echo $lang->code; @endphp">Manage members</a>
                         <a class="collapse-item" href="{{ route('client.index') }}?language=@php echo $lang->code; @endphp">Manage clients</a>
                         <a class="collapse-item" href="{{ route('pricing.index') }}?language=@php echo $lang->code; @endphp">Pricing tables</a>
+                        <h6 class="collapse-header">Our Products site</h6>
+                        <a class="collapse-item" href="{{ route('product.index') }}">Manage products</a>
+                        <a class="collapse-item" href="{{ route('faq.index') }}">Manage FAQ</a>
                     </div>
                 </div>
             </li>
@@ -184,6 +187,7 @@
                         <a class="collapse-item" href="{{ route('menu.index') }}?language=@php echo $lang->code; @endphp">{{clean( trans('niva-backend.main_menu') , array('Attr.EnableID' => true))}}</a>
                         <a class="collapse-item" href="{{ route('headerfooter-setting.edit') }}?language=@php echo $lang->code; @endphp">{{clean( trans('niva-backend.header_and_footer') , array('Attr.EnableID' => true))}}</a>
                         <a class="collapse-item" href="{{ route('language.index') }}">{{clean( trans('niva-backend.all_languages') , array('Attr.EnableID' => true))}}</a>
+                        <a class="collapse-item" href="{{ route('page-setting.edit') }}">Page content (Approach/Quality/Careers/Quote/FAQ/Sitemap)</a>
                     </div>
                 </div>
             </li>

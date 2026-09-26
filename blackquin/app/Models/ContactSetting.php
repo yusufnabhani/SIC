@@ -47,8 +47,9 @@ class ContactSetting extends Model
     	'title',
     	'iframe_txt',
 
-
-
+        'hero_title_line1', 'hero_title_line2', 'hero_description',
+        'side_kicker', 'side_title_line1', 'side_title_line2',
+        'warehouse_address', 'hours_line1', 'hours_line2', 'map_link',
  	];
 
 

@@ -33,7 +33,7 @@ class HomeSettingController extends Controller
      */
     public function update(Request $request, HomeSetting $setting, $langid)
     {
-        $setting = HomeSetting::where('language_id', $langid)->firstOrFail();
+        $setting = HomeSetting::findOrFail($langid);
         
         $input = $request->all();
 

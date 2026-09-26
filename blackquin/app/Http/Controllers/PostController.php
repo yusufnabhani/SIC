@@ -157,10 +157,11 @@ class PostController extends Controller
         $data['headerfooter'] = HeaderFooterSetting::find($lang_id);
         $data['setting'] = Setting::find($lang_id);
         $data['blogsettings'] = BlogSetting::find($lang_id);
-        $data['menus'] = Menu::where('language_id', $lang_id)->get();
+        $data['menus'] = Menu::orderBy('order')->get();
 
-
-        $article = Post::whereSlug($slug)->where('language_id', $lang_id)->first();
+        $article = Post::whereSlug($slug)->first();
+        $data['related'] = Post::where('id', '!=', optional($article)->id)
+            ->orderBy('created_at', 'desc')->limit(2)->get();
 
 
 

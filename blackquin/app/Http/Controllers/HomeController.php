@@ -18,8 +18,10 @@ use App\Models\HomeSetting;
 use App\Models\AboutSetting;
 use App\Models\PortfolioSetting;
 use App\Models\ProjectCategory; 
-use App\Models\HeaderFooterSetting; 
+use App\Models\HeaderFooterSetting;
 use App\Models\BlogSetting;
+use App\Models\PageSetting;
+use App\Models\Faq;
 use View;
 use Illuminate\Http\Request;
 use App\Http\Requests\ContactFormRequest; 
@@ -70,6 +72,8 @@ class HomeController extends Controller
         $data['projects'] = Project::where('language_id', $lang_id)->get();
         $data['testimonials'] = Testimonial::where('language_id', $lang_id)->get();
         $data['posts'] = Post::where('language_id', $lang_id)->get();
+        $data['featuredProducts'] = \App\Models\Product::orderBy('order')->limit(3)->get();
+        $data['latestPosts'] = Post::orderBy('created_at', 'desc')->limit(3)->get();
 
         return view('home', compact('langs'), $data);
     }
@@ -145,8 +149,8 @@ class HomeController extends Controller
 
         $data['headerfooter'] = HeaderFooterSetting::find($lang_id);
         $data['setting'] = Setting::find($lang_id);
-        $data['menus'] = Menu::where('language_id', $lang_id)->get();
-        $data['posts'] = Post::where('language_id', $lang_id)->get();
+        $data['menus'] = Menu::orderBy('order')->get();
+        $data['posts'] = Post::orderBy('created_at', 'desc')->get();
         $data['blogsettings'] = BlogSetting::find($lang_id);
 
         return view('blog', $data, compact('langs'));
@@ -175,21 +179,14 @@ class HomeController extends Controller
 
     public function contactPost(Request $request){
 
-
-        $messages = [
-            'g-recaptcha-response.required' => 'You must check the reCAPTCHA.',
-            'g-recaptcha-response.captcha' => 'Captcha error! try again later or contact site admin.',
-        ];
- 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
             'budget' => 'required',
             'comment' => 'required',
-            'g-recaptcha-response' => 'required|captcha'
-        ], $messages);
- 
+        ]);
+
         if ($validator->fails()) {
             return back()
                         ->withErrors($validator)
@@ -235,8 +232,73 @@ class HomeController extends Controller
         return view('contact', $data, compact('clients', 'langs'));
     }
 
+    protected function sicBaseData()
+    {
+        $currentLang = session()->has('lang')
+            ? Language::where('code', session()->get('lang'))->first()
+            : Language::where('is_default', 1)->first();
+        $lang_id = $currentLang->id;
 
+        return [
+            'currentLang' => $currentLang,
+            'langs' => Language::all(),
+            'menus' => Menu::orderBy('order')->get(),
+            'setting' => Setting::find($lang_id),
+            'headerfooter' => HeaderFooterSetting::find($lang_id),
+            'pagesetting' => PageSetting::find($lang_id),
+        ];
+    }
 
+    public function quote()
+    {
+        $data = $this->sicBaseData();
+        $data['products'] = \App\Models\Product::orderBy('name')->get();
+        return view('sic.quote', $data);
+    }
+
+    public function quotePost(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'company' => 'required',
+            'destination' => 'required',
+            'product' => 'required',
+            'quantity' => 'required',
+            'message' => 'required',
+        ]);
+
+        return back()->with('success', 'Thanks — our export team will review your request and respond shortly.');
+    }
+
+    public function faq()
+    {
+        $data = $this->sicBaseData();
+        $data['faqs'] = Faq::orderBy('order')->get();
+        return view('sic.faq', $data);
+    }
+
+    public function careers()
+    {
+        return view('sic.careers', $this->sicBaseData());
+    }
+
+    public function approach()
+    {
+        return view('sic.approach', $this->sicBaseData());
+    }
+
+    public function quality()
+    {
+        return view('sic.quality', $this->sicBaseData());
+    }
+
+    public function sitemap()
+    {
+        $data = $this->sicBaseData();
+        $data['products'] = \App\Models\Product::orderBy('order')->get();
+        return view('sic.sitemap', $data);
+    }
 
 
 
